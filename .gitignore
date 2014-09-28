@@ -16,5 +16,4 @@ classes
 /do.sh
 */catalina*
 log/
-another-storm-ui/another-storm-ui/bower_components
 node_modules/
