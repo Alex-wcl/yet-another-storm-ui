@@ -19,10 +19,16 @@ app.controller("TabCtrl", ['$rootScope', '$location', '$scope', 'client', functi
             {tabName: "Overview", tabId: "Overview", tabLink: "/overview"}
         ];
 
+        $rootScope.tabs.push(
+            {tabName: "Host", tabId: "Host", tabLink: "/host"}
+        );
+
         console.log(topos);
         for (var i = 0; i < topos.length; i++) {
             $rootScope.tabs.push({tabName: topos[i].name, tabId: topos[i].id, tabLink: "/topo"});
         }
+
+
     });
 
     $scope.isActive = function (tabId) {

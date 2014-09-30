@@ -46,6 +46,9 @@ app.config(function ($routeProvider) {
         .when('/topo', {
             templateUrl: 'views/topo.html',
             controller: 'TopoCtrl'
+        }).when('/host', {
+            templateUrl: 'views/host.html',
+            controller: 'HostCtrl'
         })
         .otherwise({
             redirectTo: '/'
