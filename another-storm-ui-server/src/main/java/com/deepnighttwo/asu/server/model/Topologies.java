@@ -6,7 +6,7 @@ package com.deepnighttwo.asu.server.model;
  * Time: 18:51
  */
 public class Topologies {
-    private Topology[] topologies;
+    private Topology[] topologies = new Topology[0];
 
     public Topology[] getTopologies() {
         return topologies;

@@ -12,10 +12,9 @@
  * Controller of the anotherStormUiApp
  */
 angular.module('anotherStormUiApp')
-    .controller('OverviewCtrl', function ($scope) {
-        $scope.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
-    });
+    .controller('OverviewCtrl', ["$scope", "client", function ($scope, client) {
+        client.overview(function (data, status) {
+            $scope.overview = data;
+            console.log(data);
+        })
+    }]);

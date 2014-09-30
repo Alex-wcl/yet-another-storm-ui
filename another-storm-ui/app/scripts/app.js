@@ -27,6 +27,9 @@ app.factory('client', ['$http', function ($http) {
     return {
         topos: function (callback) {
             request('topolist').success(callback);
+        },
+        overview: function (callback) {
+            request('overview').success(callback);
         }
     };
 }]);
@@ -48,36 +51,3 @@ app.config(function ($routeProvider) {
             redirectTo: '/'
         });
 });
-
-app.controller("TabCtrl", ['$rootScope', '$location', '$scope', 'client', function ($rootScope, $location, $scope, client) {
-    $rootScope.tabs = [];
-
-    client.topos(function (topos, status) {
-        $rootScope.tabs = [
-            {tabName: "Overview", tabId: "Overview", tabLink: "/overview"}
-        ];
-
-        for (var i = 0; i < topos.length; i++) {
-            $rootScope.tabs.push({tabName: topos[i].name, tabId: topos[i].id, tabLink: "/topo"});
-        }
-    });
-
-    $scope.isActive = function (tabId) {
-        var params = $location.search();
-
-        if (params.tabId === tabId) {
-            return true;
-        }
-
-        if ($location.path() === "/" && tabPath === "/overview") {
-            return true;
-        }
-
-    }
-}]);
-
-
-
-
-
-

@@ -54,35 +54,34 @@ public class StormRestClient {
         Topologies topoSummary = client.getTopoSummary();
         System.out.println(topoSummary);
 
-//        Gson gson = new Gson();
-//        Map<String, List<Map>> topos = (Map<String, List<Map>>) gson.fromJson(topoSummary, Map.class);
-//
-//        for (Map topo : topos.get("topologies")) {
-//            String topoId = topo.get("id").toString();
-//            System.out.println("------" + topoId + "------");
-//            String topoDetails = client.getTopologyDetails(topoId);
-//            System.out.println(topoDetails);
-//            String topoVisual = client.getTopologyVisualization(topoId);
-//            System.out.println(topoVisual);
-//            Map topoMap = gson.fromJson(topoDetails, Map.class);
-//
-//            System.out.println("------spouts------");
-//            List<Map> spouts = (List<Map>) topoMap.get("spouts");
-//            for (Map spout : spouts) {
-//                String spoutId = (String) spout.get("spoutId");
-//                String spoutDetails = client.getComponentDetails(topoId, spoutId);
-//                System.out.println(spoutDetails);
-//            }
-//
-//            System.out.println("------bolts------");
-//            List<Map> bolts = (List<Map>) topoMap.get("bolts");
-//            for (Map bolt : bolts) {
-//                String boltId = (String) bolt.get("boltId");
-//                String boltDetails = client.getComponentDetails(topoId, boltId);
-//                System.out.println(boltDetails);
-//            }
-//
-//        }
+        Gson gson = new Gson();
+
+        for (Topology topo : topoSummary.getTopologies()) {
+            String topoId = topo.getId();
+            System.out.println("------" + topoId + "------");
+            String topoDetails = client.getTopologyDetails(topoId);
+            System.out.println(topoDetails);
+            String topoVisual = client.getTopologyVisualization(topoId);
+            System.out.println(topoVisual);
+            Map topoMap = gson.fromJson(topoDetails, Map.class);
+
+            System.out.println("------spouts------");
+            List<Map> spouts = (List<Map>) topoMap.get("spouts");
+            for (Map spout : spouts) {
+                String spoutId = (String) spout.get("spoutId");
+                String spoutDetails = client.getComponentDetails(topoId, spoutId);
+                System.out.println(spoutDetails);
+            }
+
+            System.out.println("------bolts------");
+            List<Map> bolts = (List<Map>) topoMap.get("bolts");
+            for (Map bolt : bolts) {
+                String boltId = (String) bolt.get("boltId");
+                String boltDetails = client.getComponentDetails(topoId, boltId);
+                System.out.println(boltDetails);
+            }
+
+        }
 
     }
 
