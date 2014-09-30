@@ -1,5 +1,6 @@
-package com.deepnighttwo.asu.server;
+package com.deepnighttwo.asu.server.servlet;
 
+import com.deepnighttwo.asu.server.model.Person;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;

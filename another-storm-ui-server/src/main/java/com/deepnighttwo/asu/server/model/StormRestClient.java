@@ -1,4 +1,4 @@
-package com.deepnighttwo.asu.server;
+package com.deepnighttwo.asu.server.model;
 
 import com.google.gson.Gson;
 import org.apache.http.HttpResponse;
@@ -21,6 +21,8 @@ import java.util.Map;
  */
 public class StormRestClient {
 
+    private static Gson gson = new Gson();
+
     private static PoolingClientConnectionManager ccm = new PoolingClientConnectionManager();
 
     static {
@@ -42,45 +44,45 @@ public class StormRestClient {
     }
 
     public static void main(String[] args) throws IOException {
-        StormRestClient client = new StormRestClient("10.8.74.103:8080");
+        StormRestClient client = new StormRestClient("10.8.74.105:8080");
         String clusterSummary = client.getClusterSummary();
         System.out.println(clusterSummary);
         String clusterConfig = client.getClusterConfig();
         System.out.println(clusterConfig);
         String supervisorSummary = client.getSupervisorSummary();
         System.out.println(supervisorSummary);
-        String topoSummary = client.getTopoSummary();
+        Topologies topoSummary = client.getTopoSummary();
         System.out.println(topoSummary);
 
-        Gson gson = new Gson();
-        Map<String, List<Map>> topos = (Map<String, List<Map>>) gson.fromJson(topoSummary, Map.class);
-
-        for (Map topo : topos.get("topologies")) {
-            String topoId = topo.get("id").toString();
-            System.out.println("------" + topoId + "------");
-            String topoDetails = client.getTopologyDetails(topoId);
-            System.out.println(topoDetails);
-            String topoVisual = client.getTopologyVisualization(topoId);
-            System.out.println(topoVisual);
-            Map topoMap = gson.fromJson(topoDetails, Map.class);
-
-            System.out.println("------spouts------");
-            List<Map> spouts = (List<Map>) topoMap.get("spouts");
-            for (Map spout : spouts) {
-                String spoutId = (String) spout.get("spoutId");
-                String spoutDetails = client.getComponentDetails(topoId, spoutId);
-                System.out.println(spoutDetails);
-            }
-
-            System.out.println("------bolts------");
-            List<Map> bolts = (List<Map>) topoMap.get("bolts");
-            for (Map bolt : bolts) {
-                String boltId = (String) bolt.get("boltId");
-                String boltDetails = client.getComponentDetails(topoId, boltId);
-                System.out.println(boltDetails);
-            }
-
-        }
+//        Gson gson = new Gson();
+//        Map<String, List<Map>> topos = (Map<String, List<Map>>) gson.fromJson(topoSummary, Map.class);
+//
+//        for (Map topo : topos.get("topologies")) {
+//            String topoId = topo.get("id").toString();
+//            System.out.println("------" + topoId + "------");
+//            String topoDetails = client.getTopologyDetails(topoId);
+//            System.out.println(topoDetails);
+//            String topoVisual = client.getTopologyVisualization(topoId);
+//            System.out.println(topoVisual);
+//            Map topoMap = gson.fromJson(topoDetails, Map.class);
+//
+//            System.out.println("------spouts------");
+//            List<Map> spouts = (List<Map>) topoMap.get("spouts");
+//            for (Map spout : spouts) {
+//                String spoutId = (String) spout.get("spoutId");
+//                String spoutDetails = client.getComponentDetails(topoId, spoutId);
+//                System.out.println(spoutDetails);
+//            }
+//
+//            System.out.println("------bolts------");
+//            List<Map> bolts = (List<Map>) topoMap.get("bolts");
+//            for (Map bolt : bolts) {
+//                String boltId = (String) bolt.get("boltId");
+//                String boltDetails = client.getComponentDetails(topoId, boltId);
+//                System.out.println(boltDetails);
+//            }
+//
+//        }
 
     }
 
@@ -88,8 +90,10 @@ public class StormRestClient {
         return getApiData("cluster/summary");
     }
 
-    public String getTopoSummary() {
-        return getApiData("topology/summary");
+    public Topologies getTopoSummary() {
+        String topos = getApiData("topology/summary");
+        Topologies topologies = gson.fromJson(topos, Topologies.class);
+        return topologies;
     }
 
     public String getSupervisorSummary() {

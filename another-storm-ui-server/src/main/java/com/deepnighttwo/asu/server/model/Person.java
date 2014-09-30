@@ -1,4 +1,4 @@
-package com.deepnighttwo.asu.server;
+package com.deepnighttwo.asu.server.model;
 
 /**
  * User: mzang

@@ -67,7 +67,7 @@ app.controller("RelatedController", ["$scope", function ($scope) {
 app.controller("PersonList", ["$scope", "$http", function ($scope, $http) {
     $scope.load = function () {
         console.log('running http request');
-        var url = 'http://127.0.0.1:8080/angularjsajax';
+        var url = 'http://127.0.0.1:8080/topolist';
 
         // Hidden our previous section's content
         // construct our http request

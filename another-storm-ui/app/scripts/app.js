@@ -18,6 +18,20 @@ var app = angular
         'ngTouch'
     ]);
 
+
+app.factory('client', ['$http', function ($http) {
+    var request = function (restPath) {
+        return $http.get("http://127.0.0.1:8080/" + restPath);
+    };
+
+    return {
+        topos: function (callback) {
+            request('topolist').success(callback);
+        }
+    };
+}]);
+
+
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
@@ -35,13 +49,18 @@ app.config(function ($routeProvider) {
         });
 });
 
-app.controller("TabCtrl", function ($rootScope, $location, $scope) {
-    $rootScope.tabs = [
-        {tabName: "Overview", tabId: "Overview", tabLink: "/overview"}
-    ];
-    $rootScope.tabs.push({tabName: "Topo1", tabId: "Topo1-2014-09-28", tabLink: "/topo"});
-    $rootScope.tabs.push({tabName: "Topo2", tabId: "Topo2-2014-09-28", tabLink: "/topo"});
-    $rootScope.tabs.push({tabName: "Topo3", tabId: "Topo3-2014-09-28", tabLink: "/topo"});
+app.controller("TabCtrl", ['$rootScope', '$location', '$scope', 'client', function ($rootScope, $location, $scope, client) {
+    $rootScope.tabs = [];
+
+    client.topos(function (topos, status) {
+        $rootScope.tabs = [
+            {tabName: "Overview", tabId: "Overview", tabLink: "/overview"}
+        ];
+
+        for (var i = 0; i < topos.length; i++) {
+            $rootScope.tabs.push({tabName: topos[i].name, tabId: topos[i].id, tabLink: "/topo"});
+        }
+    });
 
     $scope.isActive = function (tabId) {
         var params = $location.search();
@@ -55,6 +74,10 @@ app.controller("TabCtrl", function ($rootScope, $location, $scope) {
         }
 
     }
-});
+}]);
+
+
+
+
 
 
