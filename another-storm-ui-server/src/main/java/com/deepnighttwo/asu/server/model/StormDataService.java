@@ -87,7 +87,7 @@ public class StormDataService {
 
 
     private Map<String, Host> getHosts() {
-        Map<String, Host> hosts = new HashMap<String, Host>();
+        Map<String, Host> hosts = new TreeMap<String, Host>();
 
         List<Map> sups = (List<Map>) getSupervisorSummary().get("supervisors");
 
@@ -179,22 +179,12 @@ public class StormDataService {
                 slot.setIp(host.getIp());
                 slot.setPort(slotEntry.getKey());
                 List<ExecutorStatus> exes = slotEntry.getValue();
-                Collections.sort(exes, new Comparator<ExecutorStatus>() {
-                    @Override
-                    public int compare(ExecutorStatus o1, ExecutorStatus o2) {
-                        return o1.getExecutorId().compareTo(o2.getExecutorId());
-                    }
-                });
+                Collections.sort(exes);
                 slot.setStats(exes);
 
                 slotsOfHost.add(slot);
             }
-            Collections.sort(slotsOfHost, new Comparator<SlotStatus>() {
-                @Override
-                public int compare(SlotStatus o1, SlotStatus o2) {
-                    return o1.getPort() - o2.getPort();
-                }
-            });
+            Collections.sort(slotsOfHost);
             host.setSlots(slotsOfHost);
         }
 

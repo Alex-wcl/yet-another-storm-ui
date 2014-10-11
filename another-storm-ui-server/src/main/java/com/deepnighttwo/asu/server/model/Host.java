@@ -1,7 +1,6 @@
 package com.deepnighttwo.asu.server.model;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -9,7 +8,7 @@ import java.util.List;
  * Date: 2014-10-09
  * Time: 17:05
  */
-public class Host implements Comparator<Host> {
+public class Host implements Comparable<Host> {
     String host;
     String ip;
     String uptime;
@@ -76,11 +75,6 @@ public class Host implements Comparator<Host> {
 
 
     @Override
-    public int compare(Host o1, Host o2) {
-        return o1.getHost().compareTo(o2.getHost());
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Host)) return false;
@@ -95,5 +89,10 @@ public class Host implements Comparator<Host> {
     @Override
     public int hashCode() {
         return host != null ? host.hashCode() : 0;
+    }
+
+    @Override
+    public int compareTo(Host o) {
+        return this.getHost().compareTo(o.getHost());
     }
 }

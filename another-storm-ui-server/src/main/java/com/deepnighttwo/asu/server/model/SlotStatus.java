@@ -1,6 +1,5 @@
 package com.deepnighttwo.asu.server.model;
 
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -8,17 +7,12 @@ import java.util.List;
  * Date: 2014-10-09
  * Time: 18:18
  */
-public class SlotStatus implements Comparator<SlotStatus> {
+public class SlotStatus implements Comparable<SlotStatus> {
     String host;
     String ip;
     int port;
 
     List<ExecutorStatus> stats;
-
-    @Override
-    public int compare(SlotStatus o1, SlotStatus o2) {
-        return o1.getPort() - o2.getPort();
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -70,5 +64,10 @@ public class SlotStatus implements Comparator<SlotStatus> {
 
     public void setStats(List<ExecutorStatus> stats) {
         this.stats = stats;
+    }
+
+    @Override
+    public int compareTo(SlotStatus o) {
+        return this.port - o.port;
     }
 }

@@ -2,7 +2,6 @@ package com.deepnighttwo.asu.server.model;
 
 import com.google.common.base.Splitter;
 
-import java.util.Comparator;
 import java.util.regex.Pattern;
 
 /**
@@ -10,7 +9,7 @@ import java.util.regex.Pattern;
  * Date: 2014-10-09
  * Time: 18:21
  */
-public class ExecutorStatus implements Comparator<ExecutorStatus> {
+public class ExecutorStatus implements Comparable<ExecutorStatus> {
     int port;
     String host;
 
@@ -32,26 +31,6 @@ public class ExecutorStatus implements Comparator<ExecutorStatus> {
     long failed;
 
     private static final Splitter SPLITTER = Splitter.on(Pattern.compile("[\\[|\\-|\\]]")).omitEmptyStrings().trimResults();
-
-
-    @Override
-    public int compare(ExecutorStatus o1, ExecutorStatus o2) {
-        Iterable<String> t1s = SPLITTER.split(o1.executorId);
-        String t1 = "-1";
-        for (String str : t1s) {
-            t1 = str;
-            break;
-        }
-
-        Iterable<String> t2s = SPLITTER.split(o1.executorId);
-        String t2 = "-1";
-        for (String str : t2s) {
-            t2 = str;
-            break;
-        }
-
-        return Integer.parseInt(t1) - Integer.parseInt(t2);
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -196,5 +175,24 @@ public class ExecutorStatus implements Comparator<ExecutorStatus> {
 
     public void setCompType(String compType) {
         this.compType = compType;
+    }
+
+    @Override
+    public int compareTo(ExecutorStatus o) {
+        Iterable<String> t1s = SPLITTER.split(this.executorId);
+        String t1 = "-1";
+        for (String str : t1s) {
+            t1 = str;
+            break;
+        }
+
+        Iterable<String> t2s = SPLITTER.split(o.executorId);
+        String t2 = "-1";
+        for (String str : t2s) {
+            t2 = str;
+            break;
+        }
+
+        return Integer.parseInt(t1) - Integer.parseInt(t2);
     }
 }
