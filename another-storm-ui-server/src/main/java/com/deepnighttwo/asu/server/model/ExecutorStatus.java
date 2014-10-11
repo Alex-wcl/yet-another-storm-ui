@@ -1,21 +1,57 @@
 package com.deepnighttwo.asu.server.model;
 
+import com.google.common.base.Splitter;
+
+import java.util.Comparator;
+import java.util.regex.Pattern;
+
 /**
  * User: mzang
  * Date: 2014-10-09
  * Time: 18:21
  */
-public class ExecutorStatus {
+public class ExecutorStatus implements Comparator<ExecutorStatus> {
+    int port;
+    String host;
+
     String executorId;
     String uptime;
+
+    String topoName;
+    String topoId;
+    String compId;
+    String compType;
+
     long emitted;
-    long ransferred;
+    long transferred;
     long capacity;
     long executeLatency;
     long executed;
-    long processLatency;
+    String processLatency;
     long acked;
     long failed;
+
+    private static final Splitter SPLITTER = Splitter.on(Pattern.compile("[\\[|\\-|\\]]")).omitEmptyStrings().trimResults();
+
+
+    @Override
+    public int compare(ExecutorStatus o1, ExecutorStatus o2) {
+        Iterable<String> t1s = SPLITTER.split(o1.executorId);
+        String t1 = "-1";
+        for (String str : t1s) {
+            t1 = str;
+            break;
+        }
+
+        Iterable<String> t2s = SPLITTER.split(o1.executorId);
+        String t2 = "-1";
+        for (String str : t2s) {
+            t2 = str;
+            break;
+        }
+
+        return Integer.parseInt(t1) - Integer.parseInt(t2);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -58,12 +94,12 @@ public class ExecutorStatus {
         this.emitted = emitted;
     }
 
-    public long getRansferred() {
-        return ransferred;
+    public long getTransferred() {
+        return transferred;
     }
 
-    public void setRansferred(long ransferred) {
-        this.ransferred = ransferred;
+    public void setTransferred(long ransferred) {
+        this.transferred = ransferred;
     }
 
     public long getCapacity() {
@@ -90,11 +126,11 @@ public class ExecutorStatus {
         this.executed = executed;
     }
 
-    public long getProcessLatency() {
+    public String getProcessLatency() {
         return processLatency;
     }
 
-    public void setProcessLatency(long processLatency) {
+    public void setProcessLatency(String processLatency) {
         this.processLatency = processLatency;
     }
 
@@ -112,5 +148,53 @@ public class ExecutorStatus {
 
     public void setFailed(long failed) {
         this.failed = failed;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public String getTopoName() {
+        return topoName;
+    }
+
+    public void setTopoName(String topoName) {
+        this.topoName = topoName;
+    }
+
+    public String getTopoId() {
+        return topoId;
+    }
+
+    public void setTopoId(String topoId) {
+        this.topoId = topoId;
+    }
+
+    public String getCompId() {
+        return compId;
+    }
+
+    public void setCompId(String compId) {
+        this.compId = compId;
+    }
+
+    public String getCompType() {
+        return compType;
+    }
+
+    public void setCompType(String compType) {
+        this.compType = compType;
     }
 }

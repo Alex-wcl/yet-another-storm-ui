@@ -8,10 +8,8 @@
  * Controller of the anotherStormUiApp
  */
 angular.module('anotherStormUiApp')
-    .controller('HostCtrl', function ($scope) {
-        $scope.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
-    });
+    .controller('HostCtrl', ["$scope", "client", function ($scope, client) {
+        client.hosts(function (data, status) {
+            $scope.hosts = data;
+        })
+    }]);

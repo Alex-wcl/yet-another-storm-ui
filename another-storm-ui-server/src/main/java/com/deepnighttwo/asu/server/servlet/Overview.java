@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.deepnighttwo.asu.server.model.StormDataService.toMaps;
-
 /**
  * User: mzang
  * Date: 2014-09-30
@@ -20,15 +18,14 @@ import static com.deepnighttwo.asu.server.model.StormDataService.toMaps;
 @WebServlet(name = "overview", urlPatterns = {"/overview"})
 public class Overview extends ServletBase {
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         setCommonHeaders(resp);
 
         Map<String, Object> overview = new HashMap<String, Object>();
 
-        Map<String, Object> clusterConfig = toMaps(service.getClusterConfig());
-        Map<String, Object> clusterSummary = toMaps(service.getClusterSummary());
+        Map<String, Object> clusterConfig = service.getClusterConfig();
+        Map<String, Object> clusterSummary = service.getClusterSummary();
         Map<String, Object> supervisorSummary = service.getSupervisorSummary();
 
         Topology[] topos = service.getTopologiesSummary();

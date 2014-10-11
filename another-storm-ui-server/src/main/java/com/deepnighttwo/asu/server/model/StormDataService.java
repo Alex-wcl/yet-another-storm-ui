@@ -1,12 +1,13 @@
 package com.deepnighttwo.asu.server.model;
 
+import com.google.common.base.Splitter;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * User: mzang
@@ -30,8 +31,8 @@ public class StormDataService {
     }
 
 
-    public String getClusterSummary() throws IOException {
-        return client.getClusterSummary();
+    public Map<String, Object> getClusterSummary() throws IOException {
+        return toMaps(client.getClusterSummary());
     }
 
     public Map<String, Object> getSupervisorSummary() {
@@ -55,8 +56,8 @@ public class StormDataService {
         }
     }
 
-    public String getClusterConfig() {
-        return client.getClusterConfig();
+    public Map<String, Object> getClusterConfig() {
+        return toMaps(client.getClusterConfig());
     }
 
 
@@ -83,4 +84,166 @@ public class StormDataService {
     public Map<String, Object> getComponentDetails(String topoId, String compId) {
         return toMaps(client.getComponentDetails(topoId, compId));
     }
+
+
+    private Map<String, Host> getHosts() {
+        Map<String, Host> hosts = new HashMap<String, Host>();
+
+        List<Map> sups = (List<Map>) getSupervisorSummary().get("supervisors");
+
+        for (Map sup : sups) {
+            Host host = new Host();
+
+            host.setHost(sup.get("host").toString());
+            host.setIp(sup.get("ip").toString());
+            host.setSupId(sup.get("id").toString());
+            host.setUptime(sup.get("uptime").toString());
+
+            host.setSlotsUsed(((Number) sup.get("slotsTotal")).intValue());
+            host.setSlotsTotal(((Number) sup.get("slotsUsed")).intValue());
+
+            hosts.put(host.getHost().toUpperCase(), host);
+        }
+
+        return hosts;
+
+    }
+
+    private List<ExecutorStatus> getAllExecutorStatus() {
+
+        Topology[] topos = getTopologiesSummary();
+
+        List<ExecutorStatus> exeStatusList = new ArrayList<ExecutorStatus>();
+
+        for (Topology topo : topos) {
+            String topoId = topo.getId();
+            Map<String, Object> topoDetails = getTopologyDetails(topoId);
+
+            List<Map> spouts = (List<Map>) topoDetails.get("spouts");
+            for (Map spout : spouts) {
+                String spoutId = (String) spout.get("spoutId");
+                Map<String, Object> spoutDetails = getComponentDetails(topoId, spoutId);
+                exeStatusList.addAll(getExecutorStatusFromComponent(spoutDetails));
+            }
+
+            List<Map> bolts = (List<Map>) topoDetails.get("bolts");
+            for (Map bolt : bolts) {
+                String boltId = (String) bolt.get("boltId");
+                Map<String, Object> boltDetails = getComponentDetails(topoId, boltId);
+                exeStatusList.addAll(getExecutorStatusFromComponent(boltDetails));
+            }
+        }
+
+        return exeStatusList;
+    }
+
+    public Map<String, Host> getHostWithExecutorDetails() {
+        List<ExecutorStatus> exeStatusList = getAllExecutorStatus();
+
+        Map<String, Map<Integer, List<ExecutorStatus>>> host2Slots2Executors = new HashMap<String, Map<Integer, List<ExecutorStatus>>>();
+        for (ExecutorStatus executorStatus : exeStatusList) {
+            String host = executorStatus.getHost();
+            Integer port = executorStatus.getPort();
+            Map<Integer, List<ExecutorStatus>> slots = host2Slots2Executors.get(host);
+            if (slots == null) {
+                slots = new HashMap<Integer, List<ExecutorStatus>>();
+                host2Slots2Executors.put(host, slots);
+            }
+
+            List<ExecutorStatus> exes = slots.get(port);
+            if (exes == null) {
+                exes = new ArrayList<ExecutorStatus>();
+                slots.put(port, exes);
+            }
+
+            exes.add(executorStatus);
+
+        }
+
+        Map<String, Host> hosts = getHosts();
+
+        for (Map.Entry<String, Map<Integer, List<ExecutorStatus>>> entry : host2Slots2Executors.entrySet()) {
+            String hostName = entry.getKey();
+            Host host = hosts.get(hostName);
+            if (host == null) {
+                System.err.println("No host found for " + entry);
+                continue;
+            }
+
+            List<SlotStatus> slotsOfHost = new ArrayList<SlotStatus>();
+
+            Map<Integer, List<ExecutorStatus>> slots = entry.getValue();
+            for (Map.Entry<Integer, List<ExecutorStatus>> slotEntry : slots.entrySet()) {
+                SlotStatus slot = new SlotStatus();
+                slot.setHost(hostName);
+                slot.setIp(host.getIp());
+                slot.setPort(slotEntry.getKey());
+                List<ExecutorStatus> exes = slotEntry.getValue();
+                Collections.sort(exes, new Comparator<ExecutorStatus>() {
+                    @Override
+                    public int compare(ExecutorStatus o1, ExecutorStatus o2) {
+                        return o1.getExecutorId().compareTo(o2.getExecutorId());
+                    }
+                });
+                slot.setStats(exes);
+
+                slotsOfHost.add(slot);
+            }
+            Collections.sort(slotsOfHost, new Comparator<SlotStatus>() {
+                @Override
+                public int compare(SlotStatus o1, SlotStatus o2) {
+                    return o1.getPort() - o2.getPort();
+                }
+            });
+            host.setSlots(slotsOfHost);
+        }
+
+        return hosts;
+    }
+
+    private List<ExecutorStatus> getExecutorStatusFromComponent(Map<String, Object> compDetails) {
+        List<ExecutorStatus> exeStatusList = new ArrayList<ExecutorStatus>();
+
+        String topoName = compDetails.get("name").toString();
+        String topoId = compDetails.get("topologyId").toString();
+        String compId = compDetails.get("id").toString();
+        String compType = compDetails.get("componentType").toString();
+
+        List<Map> executors = (List<Map>) compDetails.get("executorStats");
+
+        for (Map executor : executors) {
+
+            ExecutorStatus exeStatus = new ExecutorStatus();
+
+            exeStatus.setTopoId(topoId);
+            exeStatus.setTopoName(topoName);
+            exeStatus.setCompId(compId);
+            exeStatus.setCompType(compType);
+
+            String hostName = executor.get("host").toString().toUpperCase();
+            exeStatus.setHost(hostName);
+            exeStatus.setEmitted(((Number) executor.get("emitted")).longValue());
+            exeStatus.setTransferred(((Number) executor.get("transferred")).longValue());
+            exeStatus.setAcked(((Number) executor.get("acked")).longValue());
+            exeStatus.setFailed(((Number) executor.get("failed")).longValue());
+            exeStatus.setPort(((Number) executor.get("port")).intValue());
+            exeStatus.setProcessLatency((String) executor.get("completeLatency"));
+            exeStatus.setUptime(executor.get("uptime").toString());
+            exeStatus.setExecutorId(executor.get("id").toString());
+
+            exeStatusList.add(exeStatus);
+        }
+
+        return exeStatusList;
+    }
+
+    public static void main(String[] args) {
+        Splitter splitter = Splitter.on(Pattern.compile("[\\[|\\-|\\]]")).omitEmptyStrings().trimResults();
+        Iterable<String> sp = splitter.split("[ 9 - 9]");
+        for (String str : sp) {
+            System.out.println(str);
+        }
+        System.out.println();
+    }
+
 }

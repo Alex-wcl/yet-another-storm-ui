@@ -1,18 +1,30 @@
 package com.deepnighttwo.asu.server.model;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * User: mzang
  * Date: 2014-10-09
  * Time: 17:05
  */
-public class Host {
+public class Host implements Comparator<Host> {
     String host;
     String ip;
     String uptime;
     String supId;
     int slotsTotal;
     int slotsUsed;
-    SlotStatus[] slots;
+    List<SlotStatus> slots = new ArrayList<SlotStatus>();
+
+    public List<SlotStatus> getSlots() {
+        return slots;
+    }
+
+    public void setSlots(List<SlotStatus> slots) {
+        this.slots = slots;
+    }
 
     public String getHost() {
         return host;
@@ -62,12 +74,10 @@ public class Host {
         this.slotsUsed = slotsUsed;
     }
 
-    public SlotStatus[] getSlots() {
-        return slots;
-    }
 
-    public void setSlots(SlotStatus[] slots) {
-        this.slots = slots;
+    @Override
+    public int compare(Host o1, Host o2) {
+        return o1.getHost().compareTo(o2.getHost());
     }
 
     @Override

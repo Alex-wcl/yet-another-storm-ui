@@ -1,16 +1,24 @@
 package com.deepnighttwo.asu.server.model;
 
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * User: mzang
  * Date: 2014-10-09
  * Time: 18:18
  */
-public class SlotStatus {
+public class SlotStatus implements Comparator<SlotStatus> {
     String host;
     String ip;
     int port;
 
-    ExecutorStatus[] stats;
+    List<ExecutorStatus> stats;
+
+    @Override
+    public int compare(SlotStatus o1, SlotStatus o2) {
+        return o1.getPort() - o2.getPort();
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -56,11 +64,11 @@ public class SlotStatus {
         this.port = port;
     }
 
-    public ExecutorStatus[] getStats() {
+    public List<ExecutorStatus> getStats() {
         return stats;
     }
 
-    public void setStats(ExecutorStatus[] stats) {
+    public void setStats(List<ExecutorStatus> stats) {
         this.stats = stats;
     }
 }

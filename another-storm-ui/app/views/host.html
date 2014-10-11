@@ -1,7 +1,21 @@
-fffffffffffffffffffff
+<ul>
+    <li ng-repeat="host in hosts">
+        {{ host.host }}
+
+        <ul>
+            <li ng-repeat="slot in host.slots">
+                {{ slot.port }}
+
+                <ul>
+                    <li ng-repeat="exestat in slot.stats">
+
+                        {{exestat.executorId}}
 
 
+                    </li>
 
-
-
-
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>

@@ -30,6 +30,9 @@ app.factory('client', ['$http', function ($http) {
         },
         overview: function (callback) {
             request('overview').success(callback);
+        },
+        hosts: function (callback) {
+            request('hosts').success(callback);
         }
     };
 }]);
