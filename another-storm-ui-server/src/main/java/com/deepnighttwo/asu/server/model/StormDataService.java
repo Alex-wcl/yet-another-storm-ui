@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,8 +34,25 @@ public class StormDataService {
         return client.getClusterSummary();
     }
 
-    public String getSupervisorSummary() {
-        return client.getSupervisorSummary();
+    public Map<String, Object> getSupervisorSummary() {
+        Map<String, Object> supervisorSummary = toMaps(client.getSupervisorSummary());
+        addIP(supervisorSummary);
+        return supervisorSummary;
+    }
+
+
+    private void addIP(Map<String, Object> supervisorSummary) {
+        if (supervisorSummary == null) {
+            return;
+        }
+        List<Map<String, Object>> summ = (List<Map<String, Object>>) supervisorSummary.get("supervisors");
+        if (summ == null) {
+            return;
+        }
+        for (Map<String, Object> sup : summ) {
+            String host = sup.get("host").toString();
+            sup.put("ip", StormDataService.getIpByHostName(host));
+        }
     }
 
     public String getClusterConfig() {
@@ -57,6 +75,12 @@ public class StormDataService {
     }
 
 
+    public Map<String, Object> getTopologyDetails(String topoId) {
 
+        return toMaps(client.getTopologyDetails(topoId));
+    }
 
+    public Map<String, Object> getComponentDetails(String topoId, String compId) {
+        return toMaps(client.getComponentDetails(topoId, compId));
+    }
 }

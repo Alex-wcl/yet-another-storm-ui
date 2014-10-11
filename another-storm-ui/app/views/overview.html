@@ -60,6 +60,7 @@
     <tr>
         <th>Id</th>
         <th>Host</th>
+        <th>IP</th>
         <th>Uptime</th>
         <th>Slots</th>
         <th>Used slots</th>
@@ -69,6 +70,7 @@
     <tr ng-repeat="sup in overview.supervisorSummary.supervisors">
         <td>{{sup.id}}</td>
         <td>{{sup.host}}</td>
+        <td>{{sup.ip}}</td>
         <td>{{sup.uptime}}</td>
         <td>{{sup.slotsTotal}}</td>
         <td>{{sup.slotsUsed}}</td>

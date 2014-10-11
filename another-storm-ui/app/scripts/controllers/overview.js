@@ -15,6 +15,5 @@ angular.module('anotherStormUiApp')
     .controller('OverviewCtrl', ["$scope", "client", function ($scope, client) {
         client.overview(function (data, status) {
             $scope.overview = data;
-            console.log(data);
         })
     }]);
