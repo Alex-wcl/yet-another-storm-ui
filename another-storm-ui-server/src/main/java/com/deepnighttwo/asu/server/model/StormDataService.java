@@ -181,6 +181,9 @@ public class StormDataService {
                 List<ExecutorStatus> exes = slotEntry.getValue();
                 Collections.sort(exes);
                 slot.setStats(exes);
+                for (ExecutorStatus status : exes) {
+                    slot.updateUptime(status.getUptime());
+                }
 
                 slotsOfHost.add(slot);
             }
@@ -230,6 +233,14 @@ public class StormDataService {
     public static void main(String[] args) {
         Splitter splitter = Splitter.on(Pattern.compile("[\\[|\\-|\\]]")).omitEmptyStrings().trimResults();
         Iterable<String> sp = splitter.split("[ 9 - 9]");
+        for (String str : sp) {
+            System.out.println(str);
+        }
+        System.out.println();
+
+
+        splitter = Splitter.on(Pattern.compile("[d|h|m|s]")).omitEmptyStrings().trimResults();
+        sp = splitter.split("2d 0h 56m 3s");
         for (String str : sp) {
             System.out.println(str);
         }

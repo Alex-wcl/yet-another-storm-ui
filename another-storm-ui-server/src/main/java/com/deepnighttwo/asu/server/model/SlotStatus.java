@@ -1,5 +1,7 @@
 package com.deepnighttwo.asu.server.model;
 
+import com.deepnighttwo.asu.server.util.UptimeUtil;
+
 import java.util.List;
 
 /**
@@ -11,6 +13,7 @@ public class SlotStatus implements Comparable<SlotStatus> {
     String host;
     String ip;
     int port;
+    String uptime;
 
     List<ExecutorStatus> stats;
 
@@ -32,6 +35,20 @@ public class SlotStatus implements Comparable<SlotStatus> {
         int result = host != null ? host.hashCode() : 0;
         result = 31 * result + port;
         return result;
+    }
+
+    public String getUptime() {
+        return uptime;
+    }
+
+    public void setUptime(String uptime) {
+        this.uptime = uptime;
+    }
+
+    public void updateUptime(String uptime) {
+        if (UptimeUtil.compareUptime(this.uptime, uptime) < 0) {
+            this.uptime = uptime;
+        }
     }
 
     public String getHost() {
