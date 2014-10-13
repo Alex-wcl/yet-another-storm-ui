@@ -99,8 +99,8 @@ public class StormDataService {
             host.setSupId(sup.get("id").toString());
             host.setUptime(sup.get("uptime").toString());
 
-            host.setSlotsUsed(((Number) sup.get("slotsTotal")).intValue());
-            host.setSlotsTotal(((Number) sup.get("slotsUsed")).intValue());
+            host.setSlotsUsed(((Number) sup.get("slotsUsed")).intValue());
+            host.setSlotsTotal(((Number) sup.get("slotsTotal")).intValue());
 
             hosts.put(host.getHost().toUpperCase(), host);
         }

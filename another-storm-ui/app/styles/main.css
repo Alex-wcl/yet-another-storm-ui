@@ -83,3 +83,93 @@ body {
         border-bottom: 0;
     }
 }
+
+ul {
+    list-style: none;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+li {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    color: #333333;
+}
+
+ol {
+    margin: 0 0 10px 0;
+    padding: 0 0 0 18px;
+    list-style-type: decimal;
+}
+
+.host-block-1 {
+    display: block;
+    font-size: 30px;
+    color:#000000;
+    padding: 0 0 0 0;
+    margin-top: 16px;
+}
+
+.host-block-2 {
+    display: block;
+    color:#000000;
+    font-size: 30px;
+    padding: 0 0 0 0;
+    margin-top: 16px;
+}
+
+.host-block-1 > span {
+    display: block;
+    font-size: 25px;
+    border-left: 8px solid #ff7c00;
+    color: slategray;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.host-block-2 > span {
+    display: block;
+    font-size: 22px;
+    border-left: 8px solid #F1C40F;
+    color: slategray;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.slot-block {
+    display: block;
+    font-size: 22px;
+    color: lightslategray;
+    padding: 0 0 0 0;
+    margin: 8px 0 0 0;
+
+}
+
+.executor-block {
+    display: block;
+    font-size: 18px;
+    color: slategray;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.analysis-title {
+    color: navy;
+    padding-bottom: 5px;
+    font-size: 110%;
+    display: block;
+    padding-bottom: 5px;
+}
+
+.analysis-details {
+    display: block;
+    padding: 15px 15px 15px 15px;
+}
+
+.detail-cell {
+    color: ThreeDDarkShadow;
+    font-size: 80%;
+    display: inline-block;
+    border-right: 1px solid #ccc;
+    padding: 5px 5px 5px 5px;
+}

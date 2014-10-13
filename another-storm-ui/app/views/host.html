@@ -1,21 +1,51 @@
-<ul>
-    <li ng-repeat="host in hosts">
-        {{ host.host }}
+<div ng-repeat="host in hosts" class="host-block"
+     ng-class="{true:'host-block-1',false:'host-block-2'}[$index%2==0]">
+    <span>{{ host.host }} ({{host.ip}})</span>
+    <span style="font-size: 15px;border-left: 0;">
+        <i>Uptime <b>{{host.uptime}}</b> ,
+            total slots {{host.slotsTotal}} and slots used {{host.slotsUsed}}.
+            supervisor id {{host.supId}}</i>
+    </span>
 
-        <ul>
-            <li ng-repeat="slot in host.slots">
-                {{ slot.port }}
+    <div ng-repeat="slot in host.slots" class="slot-block">
+        <span><i> - Slot Port {{slot.port}}</i></span>
 
-                <ul>
-                    <li ng-repeat="exestat in slot.stats">
-
-                        {{exestat.executorId}}
-
-
-                    </li>
-
-                </ul>
-            </li>
-        </ul>
-    </li>
-</ul>
+        <!---->
+        <table class="table table-hover table-condensed executor-block">
+            <thead>
+            <tr>
+                <th>Tasks</th>
+                <th>Uptime</th>
+                <th>Topology</th>
+                <th>Component</th>
+                <th>Type</th>
+                <th>Emitted</th>
+                <th>Transferred</th>
+                <!--<th>Capacity</th>-->
+                <!--<th>Execute Latency</th>-->
+                <!--<th>Executed</th>-->
+                <!--<th>Process Latency</th>-->
+                <th>Acked</th>
+                <th>Failed</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="exestat in slot.stats">
+                <td>{{exestat.executorId}}</td>
+                <td>{{exestat.uptime}}</td>
+                <td>{{exestat.topoName}}</td>
+                <td>{{exestat.compId}}</td>
+                <td>{{exestat.compType}}</td>
+                <td>{{exestat.emitted}}</td>
+                <td>{{exestat.transferred}}</td>
+                <!--<td>{{exestat.capacity}}</td>-->
+                <!--<td>{{exestat.executeLatency}}</td>-->
+                <!--<td>{{exestat.executed}}</td>-->
+                <!--<td>{{exestat.processLatency}}</td>-->
+                <td>{{exestat.acked}}</td>
+                <td>{{exestat.failed}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -19,7 +19,7 @@ public class ServletBase extends HttpServlet {
 
     Gson gson = new Gson();
 
-    StormDataService service = new StormDataService("10.8.91.151:8080");
+    StormDataService service = new StormDataService("10.8.74.105:8080");
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
