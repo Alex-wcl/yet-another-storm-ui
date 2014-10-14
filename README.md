@@ -28,7 +28,9 @@ Host tab is new to storm origin ui. It list status start from host perspective.
 This tab shows host status in the folling order:
 
 * Host
+
 ** Slots status on the Host (Process)
+
 *** Executors status (Thread in the same Process) on the Slot
 
 In this tab, it is easy to find out if memory-critical components(Spout/Bolt) run on the same slot or if CPU-critical components run on the same host. These can be useful for trouble-shooting.
