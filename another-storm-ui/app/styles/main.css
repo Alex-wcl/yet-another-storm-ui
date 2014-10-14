@@ -85,7 +85,6 @@ body {
 }
 
 ul {
-    list-style: none;
     padding: 0 0 0 0;
     margin: 0 0 0 0;
 }
@@ -93,29 +92,35 @@ ul {
 li {
     padding: 0 0 0 0;
     margin: 0 0 0 0;
-    color: #333333;
 }
 
 ol {
-    margin: 0 0 10px 0;
-    padding: 0 0 0 18px;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
     list-style-type: decimal;
 }
 
 .host-block {
     display: block;
-    margin-top: 16px;
+    padding: 0 0 0 0;
+    margin: 4px 0 0 0;
+}
+
+.host-block > span {
+    display: block;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
 }
 
 .host-title {
     font-size: 22px;
-
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
 }
 
 .slot-block {
     display: block;
     color: black;
     padding: 0 0 0 0;
-    margin: 8px 0 0 0;
-
+    margin: 0 0 0 0;
 }
