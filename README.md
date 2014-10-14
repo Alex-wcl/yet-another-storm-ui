@@ -45,8 +45,12 @@ Key points of the tab:
 * Diff topo configs with storm cluster's config. Hightlights the different configs
 
 
+# More
 
-
+There are more features to deliver, such as 
+ - ACL
+ - JMX integration
+ - More monitoring&management. 
 
 
 
