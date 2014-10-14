@@ -55,6 +55,30 @@ Key points of the tab:
 * Diff topo configs with storm cluster's config. Hightlights the different configs
 * Kill topology is not supported
 
+
+# How to use
+
+## Project Structure
+
+There are two project. One is called another-storm-ui which is only front-end based on angularjs. Another is another-storm-ui-server which provide another-storm-ui data with rest api too.
+
+user send request to another-storm-ui, another-storm-ui request data from another-storm-ui-server and another-storm-ui-server pull data from storm rest api.
+
+## Configuration
+
+Threre are two files to be configed. 
+
+* another-storm-ui-server/src/main/resources/conf.properties: set asu.restapilocation to be a correct storm rest api endpoint
+* another-storm-ui/app/scripts/app.js: line 24, set "$http.get("http://10.8.91.154:8080/asu/" + restPath);" to be the location where another-storm-ui-server runs
+
+
+## Compile&Deploy
+
+Go into another-storm-ui-server and run "mvn clean package install", it will copy static files from another-storm-ui and build a war file named asu.war. 
+
+To deoloy it, simply copy it to a java container, e.g. tomcat's webapp folder.
+
+
 # More
 
 There are more features to deliver, such as 
