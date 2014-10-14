@@ -21,6 +21,11 @@ Overview tab is quite the same like the storm origin UI, including Cluster Summa
 
 One small enhancement it will show the IP together with the host name.
 
+Here is the snapshot
+
+ ![image](https://raw.githubusercontent.com/deepnighttwo/another-storm-ui/master/README.img/overview.png)
+
+
 ## Host tab
 
 Host tab is new to storm origin ui. It list status start from host perspective. 
@@ -34,6 +39,11 @@ This tab shows host status in the folling order:
 In this tab, it is easy to find out if memory-critical components(Spout/Bolt) run on the same slot or if CPU-critical components run on the same host. These can be useful for trouble-shooting.
 
 One new status planning to be added to this tab is the restart times of an compoent. Becuase storm will manage to restart a bad component automantically, it is hard to know how many times a component restarted. (Only knows how long it is up. It might restart one time or much more before the uptime).
+
+Here is the snapshot
+
+ ![image](https://raw.githubusercontent.com/deepnighttwo/another-storm-ui/master/README.img/host.png)
+
 
 # Topology tab(s)
 
