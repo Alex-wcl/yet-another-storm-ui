@@ -21,7 +21,7 @@ var app = angular
 
 app.factory('client', ['$http', function ($http) {
     var request = function (restPath) {
-        return $http.get("http://127.0.0.1:8080/" + restPath);
+        return $http.get("http://10.8.91.154:8080/asu/" + restPath);
     };
 
     return {

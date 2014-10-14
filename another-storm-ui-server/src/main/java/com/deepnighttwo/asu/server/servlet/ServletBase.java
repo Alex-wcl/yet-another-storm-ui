@@ -1,6 +1,7 @@
 package com.deepnighttwo.asu.server.servlet;
 
 import com.deepnighttwo.asu.server.model.StormDataService;
+import com.deepnighttwo.asu.server.util.ConfigUtil;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -19,7 +20,7 @@ public class ServletBase extends HttpServlet {
 
     Gson gson = new Gson();
 
-    StormDataService service = new StormDataService("10.8.91.151:8080");
+    StormDataService service = new StormDataService(ConfigUtil.getProp("asu.restapilocation"));
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

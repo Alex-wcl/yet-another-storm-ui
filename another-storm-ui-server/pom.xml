@@ -69,8 +69,22 @@
                 <version>9.1.5.v20140505</version>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>../another-storm-ui/app</directory>
+                            <filtering>false</filtering>
+                            <targetPath>/</targetPath>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+
         </plugins>
-        <finalName>another-storm-ui-server</finalName>
+        <finalName>asu</finalName>
     </build>
 
 </project>
