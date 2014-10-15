@@ -28,6 +28,7 @@ app.controller('TopoCtrl', ['$scope', function ($scope) {
                 x: 0,
                 y: 0,
                 width: 1000,
+                height: 1000,
                 inputConnectors: [
                     {
                         name: "aaaaa\nbbbbbb\ncccc\nddddd\n"
@@ -57,6 +58,8 @@ app.controller('TopoCtrl', ['$scope', function ($scope) {
                 id: 1,
                 x: 400,
                 y: 200,
+                width: 1000,
+                height: 1000,
                 inputConnectors: [
                     {
                         name: "A"
