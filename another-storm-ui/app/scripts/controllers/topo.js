@@ -23,10 +23,11 @@ app.controller('TopoCtrl', ['$scope', function ($scope) {
 
         nodes: [
             {
-                name: "Example Node 1",
+                name: "Example Node 1asdfasdfasdf",
                 id: 0,
                 x: 0,
                 y: 0,
+                width: 1000,
                 inputConnectors: [
                     {
                         name: "aaaaa\nbbbbbb\ncccc\nddddd\n"
