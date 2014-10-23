@@ -13,7 +13,5 @@ classes
 *.iml
 *.userlibraries
 *.pid
-/do.sh
-*/catalina*
 log/
 node_modules/
