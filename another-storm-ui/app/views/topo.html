@@ -1,27 +1,112 @@
-<p>this is the topo view</p>
+<h3>Topology summary</h3>
+<table class="table table-hover table-condensed">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Id</th>
+        <th>Status</th>
+        <th>Uptime</th>
+        <th>Num workers</th>
+        <th>Num executors</th>
+        <th>Num tasks</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{topo.name}}</td>
+        <td>{{topo.id}}</td>
+        <td>{{topo.status}}</td>
+        <td>{{topo.uptime}}</td>
+        <td>{{topo.workersTotal}}</td>
+        <td>{{topo.executorsTotal}}</td>
+        <td>{{topo.tasksTotal}}</td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Topology stats (10 min)</h3>
+<table class="table table-hover table-condensed">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Id</th>
+        <th>Status</th>
+        <th>Uptime</th>
+        <th>Num workers</th>
+        <th>Num executors</th>
+        <th>Num tasks</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{topo.name}}</td>
+        <td>{{topo.id}}</td>
+        <td>{{topo.status}}</td>
+        <td>{{topo.uptime}}</td>
+        <td>{{topo.workersTotal}}</td>
+        <td>{{topo.executorsTotal}}</td>
+        <td>{{topo.tasksTotal}}</td>
+    </tr>
+    </tbody>
+</table>
 
 
-{{data}}
 
-<div style="width: 100%; overflow: hidden;" mouse-capture>
-    <div style="width: 600px; float: left;">
-        <textarea
-                style="width: 100%; height: 100%;"
-                chart-json-edit
-                view-model="chartViewModel"
-                >
-        </textarea>
-    </div>
-    <br/>
 
-    <div style="margin-left: 0;">
-        <!--
-        This custom element defines the flowchart.
-        -->
-        <flow-chart
-                style="margin: 5px; width: 90%; height: 2999px;"
-                chart="chartViewModel"
-                >
-        </flow-chart>
+
+<div ng-repeat="d in data">
+    {{d.title}}
+    <button class="btn btn-default" ng-click="isCollapsed[$index] = !isCollapsed[$index]">Toggle collapse</button>
+    <hr>
+    <div collapse="isCollapsed[$index]">
+        <div class="well well-lg">{{d.content}}</div>
     </div>
 </div>
+
+
+<table class="table table-hover table-condensed">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Id</th>
+        <th>Status</th>
+        <th>Uptime</th>
+        <th>Num workers</th>
+        <th>Num executors</th>
+        <th>Num tasks</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>asdfasdf</td>
+        <td>asdfasdfasdf</td>
+        <td>asdfasdfasdf</td>
+        <td>asdfasdfasdf</td>
+        <td>asdfasdfasdf</td>
+        <td>asdfasdfasdf</td>
+        <td>
+            <button class="btn btn-default" ng-click="isCollapsed[50] = !isCollapsed[50]">Toggle collapse
+            </button>
+        </td>
+    </tr>
+    <tr collapse="isCollapsed[50]">
+        <td colspan="7">
+            asdfasasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+        </td>
+    </tr>
+
+    <tr>
+        <td>asdfasdf</td>
+        <td>asdfasdfasdf</td>
+        <td>asdfasdfasdf</td>
+        <td>asdfasdfasdf</td>
+        <td>asdfasdfasdf</td>
+        <td>asdfasdfasdf</td>
+        <td>
+            asdfasdfasdf
+        </td>
+    </tr>
+
+
+    </tbody>
+</table>

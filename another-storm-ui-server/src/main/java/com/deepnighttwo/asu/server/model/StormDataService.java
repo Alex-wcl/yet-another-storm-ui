@@ -85,6 +85,11 @@ public class StormDataService {
         return toMaps(client.getComponentDetails(topoId, compId));
     }
 
+    public Map<String, Object> getTopologyDetailsWithComponentDetails(String topoId) {
+
+        return toMaps(client.getTopologyDetails(topoId));
+    }
+
 
     private Map<String, Host> getHosts() {
         Map<String, Host> hosts = new TreeMap<String, Host>();
@@ -231,6 +236,11 @@ public class StormDataService {
     }
 
     public static void main(String[] args) {
+
+        System.out.println(Date.class.getSimpleName());
+        Date date = new Date();
+        date.setTime(1431246521000l);
+        System.out.println(date);
         Splitter splitter = Splitter.on(Pattern.compile("[\\[|\\-|\\]]")).omitEmptyStrings().trimResults();
         Iterable<String> sp = splitter.split("[ 9 - 9]");
         for (String str : sp) {

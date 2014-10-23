@@ -11,7 +11,7 @@ var flowchart = {
     //
     // Width of a node.
     //
-    flowchart.nodeWidth = 250;
+    flowchart.defaultNodeWidth = 250;
 
     //
     // Amount of space reserved for displaying the node's name.
@@ -28,14 +28,14 @@ var flowchart = {
     //
     flowchart.computeConnectorY = function (connectorIndex) {
         return flowchart.nodeNameHeight + (connectorIndex * flowchart.connectorHeight);
-    };
+    }
 
     //
     // Compute the position of a connector in the graph.
     //
     flowchart.computeConnectorPos = function (node, connectorIndex, inputConnector) {
         return {
-            x: node.x() + (inputConnector ? 0 : flowchart.nodeWidth),
+            x: node.x() + (inputConnector ? 0 : node.width ? node.width : flowchart.defaultNodeWidth),
             y: node.y() + flowchart.computeConnectorY(connectorIndex),
         };
     };
@@ -102,8 +102,13 @@ var flowchart = {
     flowchart.NodeViewModel = function (nodeDataModel) {
 
         this.data = nodeDataModel;
+
+        // set the default width value of the node
+        if (!this.data.width || this.data.width < 0) {
+            this.data.width = flowchart.defaultNodeWidth;
+        }
         this.inputConnectors = createConnectorsViewModel(this.data.inputConnectors, 0, this);
-        this.outputConnectors = createConnectorsViewModel(this.data.outputConnectors, flowchart.nodeWidth, this);
+        this.outputConnectors = createConnectorsViewModel(this.data.outputConnectors, this.data.width, this);
 
         // Set to true when the node is selected.
         this._selected = false;
@@ -133,8 +138,8 @@ var flowchart = {
         // Width of the node.
         //
         this.width = function () {
-            return flowchart.nodeWidth;
-        };
+            return this.data.width;
+        }
 
         //
         // Height of the node.
@@ -145,7 +150,7 @@ var flowchart = {
                     this.inputConnectors.length,
                     this.outputConnectors.length);
             return flowchart.computeConnectorY(numConnectors);
-        };
+        }
 
         //
         // Select the node.
@@ -207,7 +212,7 @@ var flowchart = {
             if (!this.data.outputConnectors) {
                 this.data.outputConnectors = [];
             }
-            this._addConnector(connectorDataModel, flowchart.nodeWidth, this.data.outputConnectors, this.outputConnectors);
+            this._addConnector(connectorDataModel, this.data.width, this.data.outputConnectors, this.outputConnectors);
         };
     };
 

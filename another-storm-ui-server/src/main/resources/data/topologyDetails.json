@@ -1,4 +1,5 @@
-{"msgTimeout": 30, "spouts": [
+{"msgTimeout": 30,
+    "spouts": [
     {
         "executors": 1,
         "emitted": 0,
@@ -10,7 +11,10 @@
         "lastError": "",
         "failed": 0
     }
-], "executorsTotal": 5, "uptime": "1h 44m 20s", "visualizationTable": [
+],
+    "executorsTotal": 5,
+    "uptime": "1h 44m 20s",
+    "visualizationTable": [
     {
         ":row": [
             {
@@ -35,7 +39,10 @@
             }
         ]
     }
-], "name": "ubt-sid-uid-rules", "workersTotal": 3, "topologyStats": [
+],
+    "name": "ubt-sid-uid-rules",
+    "workersTotal": 3,
+    "topologyStats": [
     {
         "windowPretty": "10m 0s",
         "window": "600",

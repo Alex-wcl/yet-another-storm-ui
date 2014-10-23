@@ -16,7 +16,8 @@ var app = angular
         'ngRoute',
         'ngSanitize',
         'ngTouch',
-        'flowChart'
+        'flowChart',
+        'ui.bootstrap'
     ]);
 
 
@@ -34,6 +35,9 @@ app.factory('client', ['$http', function ($http) {
         },
         hosts: function (callback) {
             request('hosts').success(callback);
+        },
+        topo: function (topoid, callback) {
+            request('topo?topoid=' + topoid).success(callback);
         }
     };
 }]);
