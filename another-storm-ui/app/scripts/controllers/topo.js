@@ -18,7 +18,8 @@ app.controller('TopoCtrl', ['$scope', '$location', "client", function ($scope, $
         $scope.topo = data;
     });
 
-    $scope.isCollapsed = [];
+    $scope.isSpoutsShow = [];
+    $scope.isBoltsShow = [];
 
     $scope.data = [
         {

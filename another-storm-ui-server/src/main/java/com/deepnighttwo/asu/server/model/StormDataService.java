@@ -86,8 +86,18 @@ public class StormDataService {
     }
 
     public Map<String, Object> getTopologyDetailsWithComponentDetails(String topoId) {
+        Map<String, Object> ret = toMaps(client.getTopologyDetails(topoId));
+        List<Map<String, Object>> bolts = (List<Map<String, Object>>) ret.get("bolts");
+        for (Map<String, Object> bolt : bolts) {
+            bolt.put("boltId", refineComponentId(bolt.get("boltId").toString()));
+        }
 
-        return toMaps(client.getTopologyDetails(topoId));
+        List<Map<String, Object>> spouts = (List<Map<String, Object>>) ret.get("spouts");
+        for (Map<String, Object> spout : spouts) {
+            spout.put("spoutId", refineComponentId(spout.get("spoutId").toString()));
+        }
+
+        return ret;
     }
 
 
@@ -199,12 +209,25 @@ public class StormDataService {
         return hosts;
     }
 
+    private String refineComponentId(String compId) {
+        if (compId.startsWith("__") == false) {
+            return compId;
+        }
+        int lastDot = compId.lastIndexOf('.');
+        if (lastDot > 0) {
+            return "__" + compId.substring(lastDot + 1);
+        } else {
+            return compId;
+        }
+
+    }
+
     private List<ExecutorStatus> getExecutorStatusFromComponent(Map<String, Object> compDetails) {
         List<ExecutorStatus> exeStatusList = new ArrayList<ExecutorStatus>();
 
         String topoName = compDetails.get("name").toString();
         String topoId = compDetails.get("topologyId").toString();
-        String compId = compDetails.get("id").toString();
+        String compId = refineComponentId(compDetails.get("id").toString());
         String compType = compDetails.get("componentType").toString();
 
         List<Map> executors = (List<Map>) compDetails.get("executorStats");

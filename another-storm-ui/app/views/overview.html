@@ -13,7 +13,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
+    <tr class="active">
         <td>{{overview.clusterSummary.stormVersion}}</td>
         <td>{{overview.clusterSummary.nimbusUptime}}</td>
         <td>{{overview.clusterSummary.supervisors}}</td>
@@ -41,7 +41,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="topo in overview.topos">
+    <tr ng-repeat="topo in overview.topos" class="active">
         <td>{{topo.name}}</td>
         <td>{{topo.id}}</td>
         <td>{{topo.status}}</td>
@@ -67,7 +67,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="sup in overview.supervisorSummary.supervisors">
+    <tr ng-repeat="sup in overview.supervisorSummary.supervisors" class="active">
         <td>{{sup.id}}</td>
         <td>{{sup.host}}</td>
         <td>{{sup.ip}}</td>
@@ -90,7 +90,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="(key, value) in overview.cluserConfig">
+    <tr ng-repeat="(key, value) in overview.cluserConfig" class="active">
         <td>{{key}}</td>
         <td>{{value}}</td>
     </tr>

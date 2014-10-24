@@ -125,3 +125,14 @@ ol {
     padding: 0 0 0 0;
     margin: 0 0 0 0;
 }
+
+.highlight-table-cell-1 {
+    background: #F0C060;
+}
+
+.highlight-table-cell-1 > table > tbody > tr:hover {
+}
+
+.highlight-table-cell-2 {
+    background: #F09048;
+}

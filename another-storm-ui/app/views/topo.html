@@ -12,7 +12,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
+    <tr class="active">
         <td>{{topo.name}}</td>
         <td>{{topo.id}}</td>
         <td>{{topo.status}}</td>
@@ -37,7 +37,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="stat in topo.topologyStats">
+    <tr ng-repeat="stat in topo.topologyStats" class="active">
         <td>{{stat.windowPretty}}</td>
         <td>{{stat.emitted}}</td>
         <td>{{stat.transferred}}</td>
@@ -66,18 +66,26 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="spout in topo.spouts">
-
-        <td>{{stat.spoutId}}</td>
-        <td>{{stat.executors}}</td>
-        <td>{{stat.tasks}}</td>
-        <td>{{stat.emitted}}</td>
-        <td>{{stat.transferred}}</td>
-        <td>{{stat.completeLatency}}</td>
-        <td>{{stat.acked}}</td>
-        <td>{{stat.failed}}</td>
-        <td>{{stat.lastError}}</td>
-        <td>{{stat.lastError}}</td>
+    <tr ng-repeat-start="spout in topo.spouts" class="active">
+        <td>{{spout.spoutId}}</td>
+        <td>{{spout.executors}}</td>
+        <td>{{spout.tasks}}</td>
+        <td class="success">{{spout.emitted}}</td>
+        <td class="info">{{spout.transferred}}</td>
+        <td>{{spout.completeLatency}}</td>
+        <td>{{spout.acked}}</td>
+        <td>{{spout.failed}}</td>
+        <td>{{spout.lastError}}</td>
+        <td>
+            <button class="btn btn-default" ng-click="isSpoutsShow[$index] = !isSpoutsShow[$index]">
+                Show Details
+            </button>
+        </td>
+    </tr>
+    <tr ng-repeat-end collapse="!isSpoutsShow[$index]">
+        <td colspan="10">
+            <div>details here</div>
+        </td>
     </tr>
     </tbody>
 </table>
@@ -87,82 +95,45 @@
 <table class="table table-hover table-condensed">
     <thead>
     <tr>
-        <th>Window</th>
+        <th>Id</th>
+        <th>Executors</th>
+        <th>Tasks</th>
         <th>Emitted</th>
         <th>Transferred</th>
-        <th>Complete latency (ms)</th>
+        <th>Capacity (last 10m)</th>
+        <th>Execute latency (ms)</th>
+        <th>Executed</th>
+        <th>Process latency (ms)</th>
         <th>Acked</th>
         <th>Failed</th>
+        <th>Last error</th>
+        <th>Show details</th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="stat in topo.topologyStats">
-        <td>{{stat.windowPretty}}</td>
-        <td>{{stat.emitted}}</td>
-        <td>{{stat.transferred}}</td>
-        <td>{{stat.completeLatency}}</td>
-        <td>{{stat.acked}}</td>
+    <tr ng-repeat-start="bolt in topo.bolts" class="active">
+        <td>{{bolt.boltId}}</td>
+        <td>{{bolt.executors}}</td>
+        <td>{{bolt.tasks}}</td>
+        <td class="success">{{bolt.emitted}}</td>
+        <td class="info">{{bolt.transferred}}</td>
+        <td>{{bolt.capacity}}</td>
+        <td>{{bolt.executeLatency}}</td>
+        <td>{{bolt.executed}}</td>
+        <td>{{bolt.processLatency}}</td>
+        <td class="success">{{bolt.acked}}</td>
+        <td>{{bolt.failed}}</td>
+        <td>{{bolt.lastError}}</td>
         <td>
-            <button class="btn btn-default" ng-click="isCollapsed[$index] = !isCollapsed[$index]">Toggle collapse
+            <button class="btn btn-default" ng-click="isBoltsShow[$index] = !isBoltsShow[$index]">
+                Show Details
             </button>
         </td>
     </tr>
-    </tbody>
-</table>
-
-<div ng-repeat="d in data">
-    {{d.title}}
-    <button class="btn btn-default" ng-click="isCollapsed[$index] = !isCollapsed[$index]">Toggle collapse</button>
-    <hr>
-    <div collapse="isCollapsed[$index]">
-        <div class="well well-lg">{{d.content}}</div>
-    </div>
-</div>
-
-
-<table class="table table-hover table-condensed">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Id</th>
-        <th>Status</th>
-        <th>Uptime</th>
-        <th>Num workers</th>
-        <th>Num executors</th>
-        <th>Num tasks</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>asdfasdf</td>
-        <td>asdfasdfasdf</td>
-        <td>asdfasdfasdf</td>
-        <td>asdfasdfasdf</td>
-        <td>asdfasdfasdf</td>
-        <td>asdfasdfasdf</td>
-        <td>
-            <button class="btn btn-default" ng-click="isCollapsed[50] = !isCollapsed[50]">Toggle collapse
-            </button>
+    <tr ng-repeat-end collapse="!isBoltsShow[$index]">
+        <td colspan="12">
+            <div>details here</div>
         </td>
     </tr>
-    <tr collapse="isCollapsed[50]">
-        <td colspan="7">
-            asdfasasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
-        </td>
-    </tr>
-
-    <tr>
-        <td>asdfasdf</td>
-        <td>asdfasdfasdf</td>
-        <td>asdfasdfasdf</td>
-        <td>asdfasdfasdf</td>
-        <td>asdfasdfasdf</td>
-        <td>asdfasdfasdf</td>
-        <td>
-            asdfasdfasdf
-        </td>
-    </tr>
-
-
     </tbody>
 </table>
