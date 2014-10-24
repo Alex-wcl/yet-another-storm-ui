@@ -239,7 +239,7 @@ public class StormDataService {
 
         System.out.println(Date.class.getSimpleName());
         Date date = new Date();
-        date.setTime(1431246521000l);
+        date.setTime(1414055030000l);
         System.out.println(date);
         Splitter splitter = Splitter.on(Pattern.compile("[\\[|\\-|\\]]")).omitEmptyStrings().trimResults();
         Iterable<String> sp = splitter.split("[ 9 - 9]");
