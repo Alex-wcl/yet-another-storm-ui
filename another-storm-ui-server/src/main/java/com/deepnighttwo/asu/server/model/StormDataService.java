@@ -88,14 +88,44 @@ public class StormDataService {
     public Map<String, Object> getTopologyDetailsWithComponentDetails(String topoId) {
         Map<String, Object> ret = toMaps(client.getTopologyDetails(topoId));
         List<Map<String, Object>> bolts = (List<Map<String, Object>>) ret.get("bolts");
-        for (Map<String, Object> bolt : bolts) {
-            bolt.put("boltId", refineComponentId(bolt.get("boltId").toString()));
-        }
 
         List<Map<String, Object>> spouts = (List<Map<String, Object>>) ret.get("spouts");
         for (Map<String, Object> spout : spouts) {
-            spout.put("spoutId", refineComponentId(spout.get("spoutId").toString()));
+            String id = (String) spout.get("spoutId");
+            spout.put("spoutId", refineComponentId(id));
+            Map<String, Object> compDetails = this.getComponentDetails(topoId, id);
+            spout.put("compDetails", compDetails);
         }
+
+        for (Map<String, Object> bolt : bolts) {
+            String id = (String) bolt.get("boltId");
+            bolt.put("boltId", refineComponentId(id));
+            Map<String, Object> compDetails = this.getComponentDetails(topoId, id);
+            bolt.put("compDetails", compDetails);
+        }
+
+
+        Map<String, Object> defaultConfigs = this.getClusterConfig();
+
+        Map<String, Object> topoConfigs = (Map<String, Object>) ret.remove("configuration");
+
+        Map<String, Object> sameConfig = new HashMap<String, Object>();
+        Map<String, Object> diffConfig = new HashMap<String, Object>();
+
+        for (Map.Entry<String, Object> conf : topoConfigs.entrySet()) {
+            String key = conf.getKey();
+            Object value = conf.getValue();
+
+            Object defaultValue = defaultConfigs.get(key);
+
+            if (Objects.equals(value, defaultValue) == true) {
+                sameConfig.put(key, value);
+            } else {
+                diffConfig.put(key, value);
+            }
+        }
+        ret.put("sameConfig", sameConfig);
+        ret.put("diffConfig", diffConfig);
 
         return ret;
     }

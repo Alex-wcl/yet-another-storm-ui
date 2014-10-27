@@ -114,7 +114,7 @@ public class StormRestClient {
     }
 
     public String getComponentDetails(String topoId, String compId) {
-        String url = String.format("topology/%s/component/%s?sys=true", topoId, compId);
+        String url = String.format("topology/%s/component/%s?sys=true&window=600", topoId, compId);
         return getApiData(url);
     }
 

@@ -126,13 +126,14 @@ ol {
     margin: 0 0 0 0;
 }
 
-.highlight-table-cell-1 {
-    background: #F0C060;
+.sub-table {
+    color: #336ACD;
+    /*65B851*/
 }
 
-.highlight-table-cell-1 > table > tbody > tr:hover {
-}
-
-.highlight-table-cell-2 {
-    background: #F09048;
+.sub-table-title {
+    color: #215096;
+    margin-top: 6px;
+    font-weight: bold;
+    /*65B851*/
 }
