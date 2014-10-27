@@ -122,6 +122,7 @@
                     </tr>
                     </thead>
                     <tbody>
+
                     <tr ng-repeat="stat in spout.compDetails.outputStats" class="active">
                         <td>{{stat.stream}}</td>
                         <td>{{stat.emitted}}</td>
@@ -140,14 +141,11 @@
                     <tr>
                         <th>Tasks</th>
                         <th>Host</th>
+                        <th>IP</th>
                         <th>Port</th>
                         <th>Uptime</th>
                         <th>Emitted</th>
                         <th>Transferred</th>
-                        <!--<th>Capacity</th>-->
-                        <!--<th>Execute Latency</th>-->
-                        <!--<th>Executed</th>-->
-                        <!--<th>Process Latency</th>-->
                         <th>Acked</th>
                         <th>Failed</th>
                     </tr>
@@ -156,13 +154,11 @@
                     <tr ng-repeat="exestat in spout.compDetails.executorStats" class="active">
                         <td>{{exestat.id}}</td>
                         <td>{{exestat.host}}</td>
+                        <td>{{exestat.ip}}</td>
                         <td>{{exestat.port}}</td>
                         <td>{{exestat.uptime}}</td>
                         <td>{{exestat.emitted}}</td>
                         <td>{{exestat.transferred}}</td>
-                        <!--<td>{{exestat.executeLatency}}</td>-->
-                        <!--<td>{{exestat.executed}}</td>-->
-                        <!--<td>{{exestat.processLatency}}</td>-->
                         <td>{{exestat.acked}}</td>
                         <td>{{exestat.failed}}</td>
                     </tr>
@@ -311,6 +307,7 @@
                     <tr>
                         <th>Tasks</th>
                         <th>Host</th>
+                        <th>Host</th>
                         <th>Port</th>
                         <th>Uptime</th>
                         <th>Emitted</th>
@@ -326,6 +323,7 @@
                     <tbody>
                     <tr ng-repeat="exestat in bolt.compDetails.executorStats" class="active">
                         <td>{{exestat.id}}</td>
+                        <td>{{exestat.ip}}</td>
                         <td>{{exestat.host}}</td>
                         <td>{{exestat.port}}</td>
                         <td>{{exestat.uptime}}</td>

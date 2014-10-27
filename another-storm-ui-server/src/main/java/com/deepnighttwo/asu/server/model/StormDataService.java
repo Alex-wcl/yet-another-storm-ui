@@ -56,6 +56,13 @@ public class StormDataService {
         }
     }
 
+    private void addIPToExeStatus(List<Map<String, Object>> executorStats) {
+        for (Map<String, Object> exeMap : executorStats) {
+            String host = exeMap.get("host").toString();
+            exeMap.put("ip", StormDataService.getIpByHostName(host));
+        }
+    }
+
     public Map<String, Object> getClusterConfig() {
         return toMaps(client.getClusterConfig());
     }
@@ -95,6 +102,7 @@ public class StormDataService {
             spout.put("spoutId", refineComponentId(id));
             Map<String, Object> compDetails = this.getComponentDetails(topoId, id);
             spout.put("compDetails", compDetails);
+            addIPToExeStatus((List<Map<String, Object>>) compDetails.get("executorStats"));
         }
 
         for (Map<String, Object> bolt : bolts) {
@@ -102,6 +110,7 @@ public class StormDataService {
             bolt.put("boltId", refineComponentId(id));
             Map<String, Object> compDetails = this.getComponentDetails(topoId, id);
             bolt.put("compDetails", compDetails);
+            addIPToExeStatus((List<Map<String, Object>>) compDetails.get("executorStats"));
         }
 
 
