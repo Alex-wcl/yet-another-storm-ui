@@ -1,5 +1,7 @@
+<!--<a href="" ng-click="gotoAnchor('SH02SVR4386')"> Go to anchor SH02SVR4386</a>-->
+
 <div ng-repeat="host in hosts" class="host-block">
-    <p class="host-title">{{ host.host }} ({{host.ip}})</p>
+    <div id="{{ host.host }}" class="host-title">{{ host.host }} ({{host.ip}})</div>
 
     <span style="font-size: 15px;padding:0 0 8px 0">
         <i>Uptime <b>{{host.uptime}}</b> ,

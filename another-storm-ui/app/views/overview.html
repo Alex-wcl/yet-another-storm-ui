@@ -42,7 +42,7 @@
     </thead>
     <tbody>
     <tr ng-repeat="topo in overview.topos" class="active">
-        <td>{{topo.name}}</td>
+        <td><a href="#/topo?tabName={{topo.name}}&tabId={{topo.id}}">{{topo.name}}</a></td>
         <td>{{topo.id}}</td>
         <td>{{topo.status}}</td>
         <td>{{topo.uptime}}</td>
@@ -122,7 +122,10 @@
     <tr ng-repeat="sup in overview.supervisorSummary.supervisors|orderBy:orderByField.overview.ss:reverseSort.overview.ss"
         class="active">
         <td>{{sup.id}}</td>
-        <td>{{sup.host}}</td>
+        <td>
+            <a href="#/host?tabName=Host&tabId=Host&scrollTo={{sup.host}}#{{sup.host}}">{{sup.host}}</a>
+
+        </td>
         <td>{{sup.ip}}</td>
         <td>{{sup.uptime}}</td>
         <td>{{sup.slotsTotal}}</td>

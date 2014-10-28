@@ -21,9 +21,14 @@ var app = angular
     ]);
 
 
-app.run(function ($rootScope) {
+app.run(function ($rootScope, $routeParams,$anchorScroll, $location) {
     $rootScope.orderByField = {};
     $rootScope.reverseSort = {};
+//    $rootScope.$on('$routeChangeSuccess', function (newRoute, oldRoute) {
+//        console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrr"+$routeParams.scrollTo);
+//        $location.hash($routeParams.scrollTo);
+//        $anchorScroll();
+//    });
 });
 
 

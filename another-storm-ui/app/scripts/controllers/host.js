@@ -8,8 +8,38 @@
  * Controller of the anotherStormUiApp
  */
 angular.module('anotherStormUiApp')
-    .controller('HostCtrl', ["$scope", "client", function ($scope, client) {
-        client.hosts(function (data, status) {
-            $scope.hosts = data;
-        })
-    }]);
+    .controller('HostCtrl', ["$scope", '$anchorScroll', '$location', "client",
+        function ($scope, $anchorScroll, $location, client) {
+            client.hosts(function (data, status) {
+                $scope.hosts = data;
+//                $anchorScroll();
+//                var params = $location.search();
+//                var archor = params.targetHost;
+//                if (archor) {
+//                    console.log(archor);
+//                    $location.hash(archor);
+//                    $anchorScroll();
+//                }
+//                setting location has will auto scroll to it
+//                $anchorScroll();
+
+            });
+
+            $scope.gotoAnchor = function (x) {
+                var newHash = $location.search().targetHost;
+
+                if ($location.hash() !== newHash) {
+                    // set the $location.hash to `newHash` and
+                    // $anchorScroll will automatically scroll to it
+
+//                    $location.hash(newHash);
+                    $anchorScroll();
+                } else {
+                    // call $anchorScroll() explicitly,
+                    // since $location.hash hasn't changed
+
+                    $anchorScroll();
+                }
+            };
+
+        }]);
