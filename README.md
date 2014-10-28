@@ -85,6 +85,19 @@ There are more features to deliver, such as
  - ACL, expecially for kill topology.
  - JMX integration.
  - More monitoring&management. 
+ 
+# Release Notes
+
+## Release 0.0.1
+
+### Feature
+
+ - Add Host perspective. Show slots and executors running on the host
+ - Show topology config as two parts: the same with default ande different with default
+ - Intergate topology components details into the same page
+ - Show IP together with hostname
+
+### Bugfix
 
 
 
