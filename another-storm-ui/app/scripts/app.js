@@ -21,6 +21,12 @@ var app = angular
     ]);
 
 
+app.run(function ($rootScope) {
+    $rootScope.orderByField = {};
+    $rootScope.reverseSort = {};
+});
+
+
 app.factory('client', ['$http', function ($http) {
     var request = function (restPath) {
         return $http.get("http://127.0.0.1:8080/" + restPath);

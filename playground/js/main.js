@@ -82,7 +82,32 @@ app.controller("PersonList", ["$scope", "$http", function ($scope, $http) {
 }]);
 
 
+app.controller('MainCtrl', function ($scope) {
+    $scope.orderByField = {};
+    $scope.reverseSort = {};
 
+
+    $scope.data = {
+        employees: [
+            {
+                firstName: 'John',
+                lastName: 'Doe',
+                age: 30
+            },
+            {
+                firstName: 'Frank',
+                lastName: 'Burns',
+                age: 54
+            },
+            {
+                firstName: 'Sue',
+                lastName: 'Banter',
+                age: 21
+            }
+        ],
+        hehe: []
+    };
+});
 
 
 
