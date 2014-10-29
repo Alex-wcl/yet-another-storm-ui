@@ -8,7 +8,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -24,7 +24,8 @@
 
 <!-- Add your site or application content here -->
 <div class="container" ng-controller="TabCtrl"
-     style="margin: 10px 10px 10px 10px ; width: 100%; border: 10px 10px 10px 10px ; ">
+     style="margin: 0 0 0 10px ; width: 99%; border: 0 0 0 10px ; ">
+    <!--style="margin: 10px 0 10px 10px ; width: 100%; border: 10px 0 10px 10px ; ">-->
     <div class="header">
         <ul class="nav nav-pills pull-right">
             <!--<li class="active"><a ng-href="#">Home</a></li>-->
@@ -35,7 +36,10 @@
                 <a ng-href="#{{tab.tabLink}}?tabName={{tab.tabName}}&tabId={{tab.tabId}}">{{tab.tabName}}</a>
             </li>
         </ul>
-        <div class="text-muted"><span class="title-font">YASU</span>
+        <div class="text-muted">
+            <a href="https://github.com/deepnighttwo/yet-another-storm-ui" target="_blank">
+            <span class="title-font">YASU</span>
+            </a>
             <span><i>yet another storm ui</i></span></div>
     </div>
 
