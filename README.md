@@ -1,7 +1,7 @@
-another-storm-ui
+yet-yet-another-storm-ui
 ================
 
-another storm ui based on storm ui rest api 0.9.2
+yet another storm ui based on storm ui rest api release with 0.9.2
 
 # Introduction
 
@@ -23,7 +23,7 @@ One small enhancement it will show the IP together with the host name.
 
 Here is the snapshot
 
- ![image](https://raw.githubusercontent.com/deepnighttwo/another-storm-ui/master/README.img/overview.png)
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/overview.png)
 
 
 ## Host tab
@@ -42,7 +42,7 @@ One new status planning to be added to this tab is the restart times of an compo
 
 Here is the snapshot
 
- ![image](https://raw.githubusercontent.com/deepnighttwo/another-storm-ui/master/README.img/host.png)
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/host.png)
 
 
 # Topology tab(s)
@@ -60,21 +60,21 @@ Key points of the tab:
 
 ## Project Structure
 
-There are two project. One is called another-storm-ui which is only front-end based on angularjs. Another is another-storm-ui-server which provide another-storm-ui data with rest api too.
+There are two project. One is called yet-another-storm-ui which is only front-end based on angularjs. Another is yet-another-storm-ui-server which provide yet-another-storm-ui data with rest api too.
 
-user send request to another-storm-ui, another-storm-ui request data from another-storm-ui-server and another-storm-ui-server pull data from storm rest api.
+user send request to yet-another-storm-ui, yet-another-storm-ui request data from yet-another-storm-ui-server and yet-another-storm-ui-server pull data from storm rest api.
 
 ## Configuration
 
 Threre are two files to be configed. 
 
-* another-storm-ui-server/src/main/resources/conf.properties: set asu.restapilocation to be a correct storm rest api endpoint
-* another-storm-ui/app/scripts/app.js: line 24, set "$http.get("http://10.8.91.154:8080/asu/" + restPath);" to be the location where another-storm-ui-server runs
+* yet-another-storm-ui-server/src/main/resources/conf.properties: set asu.restapilocation to be a correct storm rest api endpoint
+* yet-another-storm-ui/app/scripts/app.js: line 24, set "$http.get("http://10.8.91.154:8080/asu/" + restPath);" to be the location where yet-another-storm-ui-server runs
 
 
 ## Compile&Deploy
 
-Go into another-storm-ui-server and run "mvn clean package install", it will copy static files from another-storm-ui and build a war file named asu.war. 
+Go into yet-another-storm-ui-server and run "mvn clean package install", it will copy static files from yet-another-storm-ui and build a war file named asu.war. 
 
 To deoloy it, simply copy it to a java container, e.g. tomcat's webapp folder.
 
