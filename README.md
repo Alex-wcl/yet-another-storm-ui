@@ -40,7 +40,7 @@ This tab shows host status in the following order:
 
 In this tab, it is easy to find out if memory-critical components(Spout/Bolt) run on the same slot or if CPU-critical components run on the same host. These can be useful for trouble-shooting.
 
-One new status planning to be added to this tab is the restart times of an compoent. Becuase storm will manage to restart a bad component automantically, it is hard to know how many times a component restarted. (Only knows how long it is up. It might restart one time or much more before the uptime).
+One new column planning to be added is the restart times of an component. Storm will manage to restart a bad component automantically, it is hard to know how many times a component restarted. (Only knows how long it is up. It might restart one or more times prior to the last startup).
 
 Here is the snapshot
 
@@ -72,9 +72,9 @@ Basically this part comes from spout page of origin storm ui but tighter.
  * Shows status of 10 minutes only. Mostly that is what should be cared about for a real-time system.
  * Skip the empty part. For example, if there is no error, there will be no error table rather than show an empty one.
  * Add host IP of executor.
- * Shorten system component name. For example, metrics component's name is full class name which is too long to show. Now it is shorten to "__" plus "class short name".
+ * Shorten system component name. For example, metrics component's name is full class name which is kind of long. Now it is shorten to "__" plus "class short name".
  
-Then the bolt part. The change is quite the same as spout:
+Then the bolt part. The changes are quite the same as spout:
 
  ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/topo-bolt-1.png)
 
@@ -103,15 +103,20 @@ Threre are two files to be configed.
 
 ## Compile&Deploy
 
-Go into yet-another-storm-ui-server and run "mvn clean package install", it will copy static files from yet-another-storm-ui and build a war file named asu.war. 
+Go into yet-another-storm-ui-server and run "mvn clean package install", it will copy static files from yet-another-storm-ui and build a war file named yasu.war. 
 
-To deoloy it, simply copy it to a java container, e.g. tomcat's webapp folder.
+To deploy it, simply copy it to a java container, e.g. tomcat's webapp folder.
 
+# How to develop
+
+yet-another-storm-ui-server is quite a simple java restful app. it uses annotations to add servlet. There is client wrap to communicate with storm rest api. And there is a service to do more works with raw data returned from storm api (adding caches maybe). Also some beans is created to store storm api data for convenience.
+
+yet-another-storm-ui is created using yeoman, using AngularJS as framework. if you want to use grunt, please run "bower install & npm install" for the first time.
 
 # More
 
 There are more features to deliver, such as 
- - ACL, expecially for kill topology.
+ - ACL, especially for kill topology.
  - JMX integration.
  - More monitoring&management. 
  
@@ -123,7 +128,7 @@ There are more features to deliver, such as
 
  - Add Host perspective. Show slots and executors running on the host
  - Show topology config as two parts: the same with default ande different with default
- - Intergate topology components details into the same page
+ - Integrate topology components details into the same page
  - Show IP together with hostname
 
 ### Bugfix
