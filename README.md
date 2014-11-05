@@ -11,7 +11,7 @@ This project is trying to build yet another ui for storm.
 
 # About the UI
 
-The new storm ui is still web-based. Instead of using links, it will use tabs to list top-level content. There are "Overview" tab, "Host" tab and topology tab(s).
+The new storm ui is still web-based. Instead of using links, it will use tabs to list top-level content. There are "Overview" tab, "Settings" tab, "Host" tab and topology tab(s).
 
 Tabs are listed on the right-top of the page. The following is details about the tabs.
 
@@ -27,6 +27,9 @@ Here is the snapshot
 
  ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/overview.png)
 
+## Settings tab
+
+For now there is only one setting, the storm restful api URL. In this tab, the URL can be specified. Then the UI will show the new storm cluster's data.
 
 ## Host tab
 
