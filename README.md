@@ -11,11 +11,15 @@ This project is trying to build yet another ui for storm.
 
 # About the UI
 
-The new storm ui is still web-based. Instead of using links, it will use tabs to list top-level content. There are "Overview" tab, "Host" tab and topology tab(s).
+The new storm ui is still web-based. Instead of using links, it will use tabs to list top-level content. There are "Overview" tab, "Settings" tab,"Host" tab and topology tab(s).
 
 Tabs are listed on the right-top of the page. The following is details about the tabs.
 
  ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/head.png)
+ 
+# Settings tab
+ 
+Settings tab now has one setting only. In case there are more than one storm cluster, yasu supports switch storm restful URL in this tab. Specify a new URL and click the "Update Storm URL" button, the new URL will be stored in cookie and sent to server. And the UI's data will comes from the new URL.
 
 ## Overview tab
 
