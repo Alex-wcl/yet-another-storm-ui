@@ -16,8 +16,8 @@ import java.util.Map;
  * Date: 2014-09-30
  * Time: 13:08
  */
-@WebServlet(name = "overview", urlPatterns = {"/overview"})
-public class Overview extends ServletBase {
+@WebServlet(name = "checkStormURL", urlPatterns = {"/checkStormURL"})
+public class CheckStormURL extends ServletBase {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,16 +26,8 @@ public class Overview extends ServletBase {
         Map<String, Object> overview = new HashMap<String, Object>();
 
         StormDataService service = getStormDataService(req);
-        Map<String, Object> clusterConfig = service.getClusterConfig();
         Map<String, Object> clusterSummary = service.getClusterSummary();
-        Map<String, Object> supervisorSummary = service.getSupervisorSummary();
-
-        Topology[] topos = service.getTopologiesSummary();
-
-        overview.put("cluserConfig", clusterConfig);
         overview.put("clusterSummary", clusterSummary);
-        overview.put("supervisorSummary", supervisorSummary);
-        overview.put("topos", topos);
 
         resp.getOutputStream().write(gson.toJson(overview).getBytes());
         resp.setHeader("Content-Type", "application/json; charset=UTF-8");

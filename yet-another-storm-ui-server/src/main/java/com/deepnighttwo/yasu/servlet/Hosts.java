@@ -22,7 +22,7 @@ public class Hosts extends ServletBase {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         setCommonHeaders(resp);
 
-        Map<String, Host> hosts = service.getHostWithExecutorDetails();
+        Map<String, Host> hosts = getStormDataService(req).getHostWithExecutorDetails();
 
         resp.getOutputStream().write(gson.toJson(hosts.values()).getBytes());
         resp.setHeader("Content-Type", "application/json; charset=UTF-8");

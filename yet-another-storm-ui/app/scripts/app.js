@@ -21,9 +21,10 @@ var app = angular
     ]);
 
 
-app.run(function ($rootScope, $routeParams,$anchorScroll, $location) {
+app.run(function ($rootScope, $routeParams, $anchorScroll, $location) {
     $rootScope.orderByField = {};
     $rootScope.reverseSort = {};
+
 //    $rootScope.$on('$routeChangeSuccess', function (newRoute, oldRoute) {
 //        console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrr"+$routeParams.scrollTo);
 //        $location.hash($routeParams.scrollTo);
@@ -32,9 +33,24 @@ app.run(function ($rootScope, $routeParams,$anchorScroll, $location) {
 });
 
 
+function updateTabs($rootScope, topos, status) {
+    $rootScope.tabs = [];
+    $rootScope.tabs = [
+        {tabName: "Overview", tabId: "Overview", tabLink: "/overview"},
+        {tabName: "Settings", tabId: "Settings", tabLink: "/settings"},
+        {tabName: "Host", tabId: "Host", tabLink: "/host"}
+    ];
+
+    for (var i = 0; i < topos.length; i++) {
+        console.log("added" + topos[i].name);
+        $rootScope.tabs.push({tabName: topos[i].name, tabId: topos[i].id, tabLink: "/topo"});
+    }
+}
+
 app.factory('client', ['$http', function ($http) {
     var request = function (restPath) {
-        return $http.get("http://127.0.0.1:8080/" + restPath);
+//        return $http.get("http://127.0.0.1:8080/" + restPath);
+        return $http.get("/" + restPath);
     };
 
     return {
@@ -49,6 +65,9 @@ app.factory('client', ['$http', function ($http) {
         },
         topo: function (topoid, callback) {
             request('topo?topoid=' + topoid).success(callback);
+        },
+        checkStormURL: function (callback) {
+            request('checkStormURL').success(callback);
         }
     };
 }]);
@@ -68,6 +87,9 @@ app.config(function ($routeProvider) {
         }).when('/host', {
             templateUrl: 'views/host.html',
             controller: 'HostCtrl'
+        }).when('/settings', {
+            templateUrl: 'views/settings.html',
+            controller: 'SettingsCtrl'
         })
         .otherwise({
             redirectTo: '/'

@@ -1,5 +1,7 @@
 package com.deepnighttwo.yasu.servlet;
 
+import com.deepnighttwo.yasu.model.StormDataService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +23,7 @@ public class Topo extends ServletBase {
         setCommonHeaders(resp);
 
         String topoid = req.getParameter("topoid");
+        StormDataService service = getStormDataService(req);
 
         Map<String, Object> topo = service.getTopologyDetailsWithComponentDetails(topoid);
 

@@ -1,5 +1,6 @@
 package com.deepnighttwo.yasu.servlet;
 
+import com.deepnighttwo.yasu.model.StormDataService;
 import com.deepnighttwo.yasu.model.Topology;
 
 import javax.servlet.ServletException;
@@ -19,6 +20,8 @@ public class TopoList extends ServletBase {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         setCommonHeaders(resp);
+        StormDataService service = getStormDataService(req);
+
         Topology[] topos = service.getTopologiesSummary();
         resp.getOutputStream().write(gson.toJson(topos).getBytes());
         resp.setHeader("Content-Type", "application/json; charset=UTF-8");

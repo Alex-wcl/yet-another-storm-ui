@@ -11,23 +11,10 @@
  * # AboutCtrl
  * Controller of the anotherStormUiApp
  */
+
 app.controller("TabCtrl", ['$rootScope', '$location', '$scope', 'client', function ($rootScope, $location, $scope, client) {
-    $rootScope.tabs = [];
-
     client.topos(function (topos, status) {
-        $rootScope.tabs = [
-            {tabName: "Overview", tabId: "Overview", tabLink: "/overview"}
-        ];
-
-        $rootScope.tabs.push(
-            {tabName: "Host", tabId: "Host", tabLink: "/host"}
-        );
-
-        for (var i = 0; i < topos.length; i++) {
-            $rootScope.tabs.push({tabName: topos[i].name, tabId: topos[i].id, tabLink: "/topo"});
-        }
-
-
+        updateTabs($rootScope, topos, status)
     });
 
     $scope.isActive = function (tabId) {
