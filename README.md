@@ -17,10 +17,6 @@ Tabs are listed on the right-top of the page. The following is details about the
 
  ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/head.png)
  
-# Settings tab
- 
-Settings tab now has one setting only. In case there are more than one storm cluster, yasu supports switch storm restful URL in this tab. Specify a new URL and click the "Update Storm URL" button, the new URL will be stored in cookie and sent to server. And the UI's data will comes from the new URL.
-
 ## Overview tab
 
 Overview tab is quite the same like the storm origin UI, including Cluster Summary, Topology Summary, Supervisor Summary and Cluster Config. 
@@ -32,8 +28,8 @@ Here is the snapshot
  ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/overview.png)
 
 ## Settings tab
-
-For now there is only one setting, the storm restful api URL. In this tab, the URL can be specified. Then the UI will show the new storm cluster's data.
+ 
+Settings tab now has one setting only. In case there are more than one storm cluster, yasu supports switch storm restful URL in this tab. Specify a new URL and click the "Update Storm URL" button, the new URL will be stored in cookie and sent to server. And the UI's data will comes from the new URL.
 
 ## Host tab
 
