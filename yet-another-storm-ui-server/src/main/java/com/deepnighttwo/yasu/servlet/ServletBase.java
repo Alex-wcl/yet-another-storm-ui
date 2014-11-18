@@ -52,28 +52,39 @@ public class ServletBase extends HttpServlet {
             String name = cookie.getName();
             String value = cookie.getValue();
             if ("stormURL".equals(name)) {
-                value = value.trim();
-                StormDataService stormDataService = SERVICE_MAP.get(value);
-                if (stormDataService == null) {
-                    try {
-                        value = URLDecoder.decode(value,"UTF-8");
-                    } catch (UnsupportedEncodingException e) {
-                        return null;
-                    }
-
-                    System.out.println("new host value=" + value);
-
-                    stormDataService = new StormDataService(value);
-                    stormDataService.getClusterConfig();
-                    SERVICE_MAP.put(value, stormDataService);
-                    return stormDataService;
-                }
+                return getStormDataService(value);
             }
         }
-
         return DEFAULT_SERVICE;
     }
 
+    public StormDataService getStormDataService(String value) {
+        value = handleHostValueFormat(value);
+        StormDataService stormDataService = SERVICE_MAP.get(value);
+        if (stormDataService == null) {
+            stormDataService = new StormDataService(value);
+            stormDataService.getClusterConfig();
+            SERVICE_MAP.put(value, stormDataService);
+            return stormDataService;
+        } else {
+            return stormDataService;
+        }
+
+    }
+
+    public String handleHostValueFormat(String host) {
+        try {
+            host = URLDecoder.decode(host, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException("failed to decode cookie stormURL", e);
+        }
+        host = host.toLowerCase().trim();
+        host = host.replace("http://", "");
+        host = host.replace("http：//", "");
+        host = host.replace("/", "");
+        host = host.replace("：", ":");
+        return host;
+    }
 
     @Override
     protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

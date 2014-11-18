@@ -1,7 +1,6 @@
 package com.deepnighttwo.yasu.servlet;
 
 import com.deepnighttwo.yasu.model.StormDataService;
-import com.deepnighttwo.yasu.model.Topology;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,15 +20,21 @@ public class CheckStormURL extends ServletBase {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String newStormRestURL = req.getParameter("newStormRestHost");
+
         setCommonHeaders(resp);
 
-        Map<String, Object> overview = new HashMap<String, Object>();
+        Map<String, Object> ret = new HashMap<String, Object>();
 
-        StormDataService service = getStormDataService(req);
-        Map<String, Object> clusterSummary = service.getClusterSummary();
-        overview.put("clusterSummary", clusterSummary);
+        StormDataService service = getStormDataService(newStormRestURL);
 
-        resp.getOutputStream().write(gson.toJson(overview).getBytes());
+        service.getClusterSummary();
+
+        String stormRestHost = service.getStormRestHost();
+        ret.put("stormRestHost", stormRestHost);
+
+        resp.getOutputStream().write(gson.toJson(ret).getBytes());
         resp.setHeader("Content-Type", "application/json; charset=UTF-8");
         resp.setStatus(HttpServletResponse.SC_OK);
 

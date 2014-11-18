@@ -30,17 +30,31 @@ public class StormRestClient {
         ccm.setDefaultMaxPerRoute(4096);
     }
 
-    private static HttpClient client = new DefaultHttpClient(ccm);
+    String stormRestHost;
 
     String apiBase;
 
-    public StormRestClient(String stormUIHost) {
-        updateStormUIHost(stormUIHost);
+    private static HttpClient client = new DefaultHttpClient(ccm);
 
+    public String getApiBase() {
+        return apiBase;
     }
 
-    public void updateStormUIHost(String stormUIHost) {
-        this.apiBase = "http://" + stormUIHost + "/api/v1/";
+    public String getStormRestHost() {
+        return stormRestHost;
+    }
+
+    public void setStormRestHost(String stormRestHost) {
+        this.stormRestHost = stormRestHost;
+    }
+
+    public StormRestClient(String stormUIHost) {
+        updateStormUIHost(stormUIHost);
+    }
+
+    public void updateStormUIHost(String stormRestHost) {
+        this.stormRestHost = stormRestHost;
+        this.apiBase = "http://" + stormRestHost + "/api/v1/";
     }
 
     public static void main(String[] args) throws IOException {

@@ -49,25 +49,25 @@ function updateTabs($rootScope, topos, status) {
 
 app.factory('client', ['$http', function ($http) {
     var request = function (restPath) {
-//        return $http.get("http://127.0.0.1:8080/" + restPath);
+        //return $http.get("http://127.0.0.1:8080/" + restPath);
         return $http.get("/" + restPath);
     };
 
     return {
-        topos: function (callback) {
-            request('topolist').success(callback);
+        topos: function (callback, failcallback) {
+            request('topolist').success(callback).error(failcallback);
         },
-        overview: function (callback) {
-            request('overview').success(callback);
+        overview: function (callback, failcallback) {
+            request('overview').success(callback).error(failcallback);
         },
-        hosts: function (callback) {
-            request('hosts').success(callback);
+        hosts: function (callback, failcallback) {
+            request('hosts').success(callback).error(failcallback);
         },
-        topo: function (topoid, callback) {
-            request('topo?topoid=' + topoid).success(callback);
+        topo: function (topoid, callback, failcallback) {
+            request('topo?topoid=' + topoid).success(callback).error(failcallback);
         },
-        checkStormURL: function (callback) {
-            request('checkStormURL').success(callback);
+        checkStormURL: function (newStormRestHost, callback, failcallback) {
+            request('checkStormURL?newStormRestHost=' + newStormRestHost).success(callback).error(failcallback);
         }
     };
 }]);

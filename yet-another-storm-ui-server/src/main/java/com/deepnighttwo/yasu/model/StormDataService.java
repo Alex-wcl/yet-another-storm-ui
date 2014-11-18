@@ -18,6 +18,10 @@ public class StormDataService {
     StormRestClient client;
     static Gson gson = new Gson();
 
+    public String getStormRestHost(){
+        return client.getStormRestHost();
+    }
+
     public StormDataService(String stormUIHost) {
         client = new StormRestClient(stormUIHost);
     }
