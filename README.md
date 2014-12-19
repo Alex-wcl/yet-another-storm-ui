@@ -98,10 +98,9 @@ user send request to yet-another-storm-ui, yet-another-storm-ui request data fro
 
 ## Configuration
 
-Threre are two files to be configed. 
+There is a config to be changed.
 
 * yet-another-storm-ui-server/src/main/resources/conf.properties: set asu.restapilocation to be a correct storm rest api endpoint
-* yet-another-storm-ui/app/scripts/app.js: line 37, set "$http.get("http://[IP_OF_YASU_SERVER]:8080/asu/" + restPath);" to be the location where yet-another-storm-ui-server runs
 
 
 ## Compile&Deploy
