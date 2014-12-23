@@ -100,8 +100,8 @@ user send request to yet-another-storm-ui, yet-another-storm-ui request data fro
 
 There are two configs to be changed.
 
-* yet-another-storm-ui-server/src/main/resources/conf.properties: set asu.restapilocation to be a correct storm rest api endpoint
-* yet-another-storm-ui/app/scripts/app.js: return $http.get("/yasu/" + restPath); should be changed to return $http.get("TOMCAT_SERVER_IP:PORT/SUB_DIR_FOR_YASU" + restPath); . For example: return $http.get("1.2.3.4:8181/yasu/" + restPath);
+* yet-another-storm-ui-server/src/main/resources/conf.properties: set asu.restapilocation to be a correct storm rest api endpoint (or you can change it in the Settings tab at runtime)
+* yet-another-storm-ui/app/scripts/app.js: "return $http.get("/yasu/" + restPath);" should be changed to "return $http.get("http://TOMCAT_SERVER_IP:PORT/SUB_DIR_FOR_YASU" + restPath);" . For example: return $http.get("http://1.2.3.4:8181/yasu/" + restPath);
 
 
 ## Compile&Deploy
