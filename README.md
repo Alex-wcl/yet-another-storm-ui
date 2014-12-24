@@ -39,7 +39,7 @@ Get code from github. Goes into directory "yet-another-storm-ui/yet-another-stor
 
 Copy the "yasu.war" to the Tomcat's webapp dir ( NOTE: Please don't rename the war file, if rename is needed, please refer to the last paragraph "Touble Shooting -> YASU not works if rename the war file" of this section) and this webapp will run in subdomain "yasu"
 
-## Use & Config
+## Use & Settings
 
 Open the link "http://TOMCAT_SERVER_IP:PORT/yasu" in browser, like "http://127.0.0.1:8181/yasu". You might see a page like this:
 
@@ -73,7 +73,7 @@ If rename the war file is needed, a file need to be modified:
 
 * yet-another-storm-ui/app/scripts/app.js: "return $http.get("/yasu/" + restPath);" should be changed to "return $http.get("/THE_WAR_FILE_NAME/" + restPath);" . For example: return $http.get("/myyasu/" + restPath);
 
-The rest steps are the same
+The rest steps are the same ( and surely open the link with the new subdomain name)
 
 Following are details about the UI.
 
