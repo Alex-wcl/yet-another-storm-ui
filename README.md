@@ -163,29 +163,12 @@ Finally comes the config parts. It is separated to two parts, "Different configs
 
 PS: Topology actions are not supported for now. This might be supported together with ACL.
 
-# How to use
 
-## Project Structure
+# How to develop
 
 There are two project. One is called yet-another-storm-ui which is only front-end based on angularjs. Another is yet-another-storm-ui-server which provide yet-another-storm-ui data with rest api too.
 
 user send request to yet-another-storm-ui, yet-another-storm-ui request data from yet-another-storm-ui-server and yet-another-storm-ui-server pull data from storm rest api.
-
-## Configuration
-
-There are two configs to be changed.
-
-* yet-another-storm-ui-server/src/main/resources/conf.properties: set asu.restapilocation to be a correct storm rest api endpoint (or you can change it in the Settings tab at runtime)
-* yet-another-storm-ui/app/scripts/app.js: "return $http.get("/yasu/" + restPath);" should be changed to "return $http.get("http://TOMCAT_SERVER_IP:PORT/SUB_DIR_FOR_YASU" + restPath);" . For example: return $http.get("http://1.2.3.4:8181/yasu/" + restPath);
-
-
-## Compile&Deploy
-
-Go into yet-another-storm-ui-server and run "mvn clean package install", it will copy static files from yet-another-storm-ui and build a war file named yasu.war. 
-
-To deploy it, simply copy it to a java container, e.g. tomcat's webapp folder.
-
-# How to develop
 
 yet-another-storm-ui-server is quite a simple java restful app. it uses annotations to add servlet. There is client wrap to communicate with storm rest api. And there is a service to do more works with raw data returned from storm api (adding caches maybe). Also some beans is created to store storm api data for convenience.
 
