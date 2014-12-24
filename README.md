@@ -45,7 +45,7 @@ Open the link "http://TOMCAT_SERVER_IP:PORT/yasu" in browser, like "http://127.0
 
  ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/happypath-first-open.png)
 
-It is almost there. YASU need a configuration now to know the Storm UI url so that YASU can get storm cluster data.
+It is almost there. YASU now need a configuration to know the Storm UI url so that YASU can get storm cluster status data.
 
 Click the Settings tab, specifiy the Storm UI url as follow:
 
@@ -67,11 +67,15 @@ Then please check the storm url and update again.
 
 After the Storm URL is updated succeeded, all topologies should be listed as tabs after Host tab. But for firefox, this is not done automatically. Then please press F5 to refresh the whole page.
 
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/happypath-settings-trouble-shootings-notopos.png)
+
 ### YASU not works if rename the war file
 
 If rename the war file is needed, a file need to be modified:
 
 * yet-another-storm-ui/app/scripts/app.js: "return $http.get("/yasu/" + restPath);" should be changed to "return $http.get("/THE_WAR_FILE_NAME/" + restPath);" . For example: return $http.get("/myyasu/" + restPath);
+
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/happypath-troubleshoottings-changewarname.png)
 
 The rest steps are the same ( and surely open the link with the new subdomain name)
 
@@ -83,7 +87,7 @@ The new storm ui is still web-based and trying to provide one-page web applicati
 
 Tabs are listed on the right-top of the page. The following is details about the tabs.
 
- ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/head.png)
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/intro-header.png)
  
 ## Overview tab
 
@@ -93,11 +97,14 @@ One small enhancement it will show the IP together with the host name.
 
 Here is the snapshot
 
- ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/overview.png)
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/intro-overview.png)
 
 ## Settings tab
  
 Settings tab now has one setting only. In case there are more than one storm cluster, yasu supports switch storm restful URL in this tab. Specify a new URL and click the "Update Storm URL" button, the new URL will be stored in cookie and sent to server. And the UI's data will comes from the new URL.
+
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/intro-settings.png)
+
 
 ## Host tab
 
@@ -115,7 +122,7 @@ One new column planning to be added is the restart times of an component. Storm 
 
 Here is the snapshot
 
- ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/hosts.png)
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/intro-hosts.png)
 
 
 ## Topology tab(s)
@@ -126,17 +133,17 @@ There are six parts on topology tab
 
 First two is Topology summary and Topology stats:
 
- ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/topology-1.png)
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/intro-topology-1.png)
 
 Theses are the same as storm default. 
 
 Then the spout part:
 
- ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/topo-spout-1.png)
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/intro-topo-spout-1.png)
 
 In this part, some key columns uses different background color. And there is a detail button to show the details of the spout:
  
- ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/topo-spout-2.png)
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/intro-topo-spout-2.png)
 
 Basically this part comes from spout page of origin storm ui but tighter.
  
@@ -147,11 +154,11 @@ Basically this part comes from spout page of origin storm ui but tighter.
  
 Then the bolt part. The changes are quite the same as spout:
 
- ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/topo-bolt-1.png)
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/intro-topo-bolt-1.png)
 
 Finally comes the config parts. It is separated to two parts, "Different configs from default" and "Same configs with default".  
 
- ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/topo-config.png)
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/intro-topo-config.png)
  
 
 PS: Topology actions are not supported for now. This might be supported together with ACL.
