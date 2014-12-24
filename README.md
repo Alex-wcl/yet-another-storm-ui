@@ -7,11 +7,79 @@ yet another storm ui based on storm ui rest api release with 0.9.2
 
 Origin storm ui is not handy for some cases. Thanks for the 0.9.2 release brings out the rest api which is the footstone of this project.
 
-This project is trying to build yet another ui for storm. 
+This project is trying to build yet another ui for storm.
+
+# High Lights
+
+ * Provide a Host perspective to show runtime status of topologies.
+ * Provide one-page web application experience
+ * Other enhancements...
+
+This is the UI at first glance:
+
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/first-glance.png)
+
+# Happy Path
+
+If interested, this section will help to run this web application.
+
+## Dependencies
+
+ * Need storm 0.9.2 (0.9.3 is not tested yet). Start storm ui using "storm ui"
+ * Need Maven 3 to build
+ * Developed using Java 7 (Should work on Java 6)
+ * Run in Tomcat (Any Java EE container should works)
+ * Tested and support Chrome and Firefox. IE is not supported (Not a web ui expert, don't know why and has no plan to support IE (-: )
+
+## Build
+
+Get code from github. Goes into directory "yet-another-storm-ui/yet-another-storm-ui-server", run "maven clean pacakge install". Then goes to "yet-another-storm-ui/yet-another-storm-ui-server/target", there should be a "yasu.war".
+
+## Deploy
+
+Copy the "yasu.war" to the Tomcat's webapp dir ( NOTE: Please don't rename the war file, if rename is needed, please refer to the last paragraph "Touble Shooting -> YASU not works if rename the war file" of this section) and this webapp will run in subdomain "yasu"
+
+## Use & Config
+
+Open the link "http://TOMCAT_SERVER_IP:PORT/yasu" in browser, like "http://127.0.0.1:8181/yasu". You might see a page like this:
+
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/happypath-first-open.png)
+
+It is almost there. YASU need a configuration now to know the Storm UI url so that YASU can get storm cluster data.
+
+Click the Settings tab, specifiy the Storm UI url as follow:
+
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/happypath-settings.png)
+
+Click "Update Storm URL" button. If update succeeded, there will be a tooltip says "Storm url updated to AAA.BBB.CCC.DDD:EEEEE" and all topologies should be listed as tabs after Host tab, as follow:
+
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/happypath-settings-success.png)
+
+If Update failed, there will be a tooltip as follow:
+
+ ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/happypath-settings-fail.png)
+
+Then please check the storm url and update again.
+
+## Trouble Shootings
+
+### Topologies Tabs now showed
+
+After the Storm URL is updated succeeded, all topologies should be listed as tabs after Host tab. But for firefox, this is not done automatically. Then please press F5 to refresh the whole page.
+
+### YASU not works if rename the war file
+
+If rename the war file is needed, a file need to be modified:
+
+* yet-another-storm-ui/app/scripts/app.js: "return $http.get("/yasu/" + restPath);" should be changed to "return $http.get("/THE_WAR_FILE_NAME" + restPath);" . For example: return $http.get("/myyasu/" + restPath);
+
+The rest steps are the same
+
+Following are details about the UI.
 
 # About the UI
 
-The new storm ui is still web-based. Instead of using links, it will use tabs to list top-level content. There are "Overview" tab, "Settings" tab, "Host" tab and topology tab(s).
+The new storm ui is still web-based and trying to provide one-page web application experience. It will use tabs to list top-level content. There are "Overview" tab, "Settings" tab, "Host" tab and topology tab(s).
 
 Tabs are listed on the right-top of the page. The following is details about the tabs.
 
@@ -50,7 +118,7 @@ Here is the snapshot
  ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/hosts.png)
 
 
-# Topology tab(s)
+## Topology tab(s)
 
 Each topology is listed as a tab. 
 
@@ -114,7 +182,7 @@ To deploy it, simply copy it to a java container, e.g. tomcat's webapp folder.
 
 yet-another-storm-ui-server is quite a simple java restful app. it uses annotations to add servlet. There is client wrap to communicate with storm rest api. And there is a service to do more works with raw data returned from storm api (adding caches maybe). Also some beans is created to store storm api data for convenience.
 
-yet-another-storm-ui is created using yeoman, using AngularJS as framework. if you want to use grunt, please run "bower install & npm install" for the first time.
+yet-another-storm-i is created using yeoman, using AngularJS as framework. if you want to use grunt, please run "bower install & npm install" for the first time.
 
 # More
 
