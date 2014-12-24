@@ -63,7 +63,7 @@ Then please check the storm url and update again.
 
 ## Trouble Shootings
 
-### Topologies Tabs now showed
+### Topologies Tabs not listed
 
 After the Storm URL is updated succeeded, all topologies should be listed as tabs after Host tab. But for firefox, this is not done automatically. Then please press F5 to refresh the whole page.
 
@@ -71,7 +71,7 @@ After the Storm URL is updated succeeded, all topologies should be listed as tab
 
 If rename the war file is needed, a file need to be modified:
 
-* yet-another-storm-ui/app/scripts/app.js: "return $http.get("/yasu/" + restPath);" should be changed to "return $http.get("/THE_WAR_FILE_NAME" + restPath);" . For example: return $http.get("/myyasu/" + restPath);
+* yet-another-storm-ui/app/scripts/app.js: "return $http.get("/yasu/" + restPath);" should be changed to "return $http.get("/THE_WAR_FILE_NAME/" + restPath);" . For example: return $http.get("/myyasu/" + restPath);
 
 The rest steps are the same
 
