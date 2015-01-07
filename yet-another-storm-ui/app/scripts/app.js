@@ -62,7 +62,7 @@ function updateTabs($rootScope, topos, status) {
 
 app.factory('client', ['$http', function ($http) {
   var request = function (restPath) {
-    return $http.get("/myyasu/" + restPath);
+    return $http.get("/yasu/" + restPath);
   };
 
   return {
