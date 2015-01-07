@@ -25,7 +25,7 @@ If interested, this section will help to run this web application.
 
 ## Dependencies
 
- * Need storm 0.9.2 (0.9.3 is not tested yet). Start storm ui using "storm ui"
+ * Need storm 0.9.2 or 0.9.3. Start storm ui using "storm ui"
  * Need Maven 3 to build
  * Developed using Java 7 (Should work on Java 6)
  * Run in Tomcat (Any Java EE container should works)
@@ -41,7 +41,7 @@ Copy the "yasu.war" to the Tomcat's webapp dir ( NOTE: Please don't rename the w
 
 ## Use & Settings
 
-Open the link "http://TOMCAT_SERVER_IP:PORT/yasu" in browser, like "http://127.0.0.1:8181/yasu". You might see a page like this:
+Open the link "http://TOMCAT_SERVER_IP:PORT/yasu" in browser, like "http://127.0.0.1:8080/yasu". You might see a page like this:
 
  ![image](https://raw.githubusercontent.com/deepnighttwo/yet-another-storm-ui/master/README.img/happypath-first-open.png)
 
