@@ -9,6 +9,8 @@ Origin storm ui is not handy for some cases. Thanks for the 0.9.2 release brings
 
 This project is trying to build yet another ui for storm.
 
+Licence: Apache License 2
+
 # Why another Storm UI?
 
 Original storm  UI is not customizable. So
