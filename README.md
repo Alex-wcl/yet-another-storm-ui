@@ -1,7 +1,7 @@
 yet-yet-another-storm-ui
 ================
 
-yet another storm ui based on storm ui rest api release with 0.9.2
+yet another storm ui based on storm ui rest api release with 0.9.2 or later
 
 # Introduction
 
@@ -9,9 +9,24 @@ Origin storm ui is not handy for some cases. Thanks for the 0.9.2 release brings
 
 This project is trying to build yet another ui for storm.
 
+# Why another Storm UI?
+
+Original storm  UI is not customizable. So
+
+ - Dangerous operations are exposed to all users, such as "Kill topology"
+ - ACL, SSO can not be added (this is not support in this project either but it can be done based on this easily)
+ - Other data can not be added such as host ip, host load, etc.
+
+And from the usability part
+
+ - Need to open lots of tabs to check a topology status
+ - Runtime status on a host is not provided
+
+This project can helps if these are what you want.
+
 # High Lights
 
- * Provide a Host perspective to show runtime status of topologies.
+ * Provide a Host perspective to show runtime status of topologies on hosts.
  * Provide one-page web application experience
  * Other enhancements...
 
